@@ -1,67 +1,41 @@
-
-#في سطر 25 و 28 استبدل 5089553588 بايدي from config import Config
 from config import Config
-import telebot
-import requests
 import os
+import telebot, requests, random, re 
+from telebot import types 
 
 tok = Config.TG_BOT_TOKEN
 
 bot = telebot.TeleBot(tok)
-is_bot_active = True
-
-@bot.message_handler(commands=['start'])
+is_bot_active = True  
+@bot.message_handler(commands=["start"])
 def start(message):
-    bot.reply_to(message, """مرحبًا! أكتب ماتريد البحث عنه سوء كان ملف بايثون او php او أي لغة أخرى وتستطيع البحث عن رات وغيره
-- @Y_3_YY    """)
-
-@bot.message_handler(func=lambda message: True)
-def search_projects(message):
-    global is_bot_active
-    query = message.text
-
-    if query == "/off" and message.from_user.id == 5089553588:
-        is_bot_active = False
-        bot.reply_to(message, "تم إيقاف البوت.")
-    elif query == "/on" and message.from_user.id == 5089553588:
-        is_bot_active = True
-        bot.reply_to(message, "تم تشغيل البوت.")
-    elif is_bot_active:
-        url = f'https://api.github.com/search/repositories?q={query}&sort=stars&order=desc'
-        response = requests.get(url)
-        
-        if response.status_code == 200:
-            projects = response.json()['items']
-            message_ms = f'تم العثور على {len(projects)} مشروعًا:\n'
-            
-            for project in projects:
-                name_heroes = project['name']
-                url_pro = project['html_url']
-                message_ms += f'اسم المشروع: {name_heroes}\n'
-                message_ms += f'رابط المشروع: {url_pro}\n'
-                message_ms += '---------------------------------------\n'
-                
-        else:
-            message_ms = 'حدث خطأ أثناء البحث عن المشاريع.'
-            message_ms += 'رمز الحالة:' + str(response.status_code)
-        
-        bot.reply_to(message, message_ms)
-        
-        for project in projects:
-            url_pro = project['html_url']
-            name_heroes = project['name']
-            zip_url = f'{url_pro}/archive/refs/heads/master.zip'
-            r = requests.get(zip_url)
-            
-            with open(f'{name_heroes}.zip', 'wb') as f:
-                f.write(r.content)
-            
-            id_m = message.chat.id
-            bot.send_document(id_m, open(f'{name_heroes}.zip', 'rb'))
-            os.remove(f'{name_heroes}.zip')
-    else:
-        bot.reply_to(message, "البوت متوقف حاليًا.")
-
-
-print("Ch : @PyHimler")
-bot.polling(True)
+    private = types.InlineKeyboardMarkup()
+    button = types.InlineKeyboardButton("✓ تلاوة ", callback_data="quran"),("✓ صورة دينية ", callback_data="religious")
+    private.add(button)   
+    bot.send_photo(message.chat.id,"https://t.me/ifuwufuj/29",caption="""
+✓ 👋 مرحبا بك عزيزي انا بوت اسلامي اقدم صور دينيه وتلاوات باصوات وابدعات شيوخ متعددين 
+✓ 🔍 انقر على الزر ادناة لارسال تلاوة
+""", reply_markup=private)
+@bot.callback_query_handler(func=lambda call: True)
+def tylaoa(call):
+    if call.data == "quran":
+        voices = "https://t.me/ALMORTAGELRSK/" + str(random.randint(7, 276))
+        bot.send_voice(call.message.chat.id, voices, caption="""
+✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
+""")
+@bot.callback_query_handler(func=lambda call: True)
+def imagez(call):
+    if call.data == "religious":
+        voices = "https://t.me/livequrann/" + str(random.randint(7, 276))
+        bot.send_photo(call.message.chat.id, voices, caption="""
+✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
+""")
+print("\033[4;35m-"*10)
+print("\033[1;33m• Running..... /start ")
+print("\033[4;35m-"*10)
+bot.polling(none_stop=True)
+"""
+Dev /- @Almortagel_12
+Ch /- @AlmortagelTech
+In /- 2024/2/12
+"""
