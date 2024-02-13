@@ -1,6 +1,6 @@
 from config import Config
 import os
-import telebot, requests, random, re 
+import telebot, requests, random
 from telebot import types 
 
 tok = Config.TG_BOT_TOKEN
