@@ -28,8 +28,8 @@ def tylaoa(call):
 @bot.callback_query_handler(func=lambda call: True)
 def imagez(call):
     if call.data == "religious":
-        photos = "https://t.me/livequrann/" + str(random.randint(7, 276))
-        bot.send_photo(call.message.chat.id, voices, caption="""
+        photos = "https://t.me/livequrann/" + str(random.randint(22, 221))
+        bot.send_photo(call.message.chat.id, photos, caption="""
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
 """)
 print("\033[4;35m-"*10)
