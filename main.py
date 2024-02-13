@@ -38,8 +38,9 @@ def imagez(call):
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
 """)
 
-@bot.message_handler(filter.commands="starttt")
+@bot.message_handler(func=lambda message: True)
 def starttt(message):
+    if message.data == "starttt":
     private = types.InlineKeyboardMarkup() 
     butteonn = types.InlineKeyboardButton("مطور البوت", url="https://t.me/Almortagel_12")
     private.add(butteonn)   
