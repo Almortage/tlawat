@@ -12,8 +12,9 @@ def start(message):
     private = types.InlineKeyboardMarkup()
     button = types.InlineKeyboardButton("✓ تلاوة ", callback_data="quran")
     buttoon = types.InlineKeyboardButton("✓ صورة دينية ", callback_data="religious")
-    private.add(buttoon)
-    private.add(button)   
+    butteon = types.InlineKeyboardButton("مطور البوت", url="https://t.me/Almortagel_12")
+    private.add(button,buttoon)
+    private.add(butteon)   
     bot.send_photo(message.chat.id,"https://t.me/ifuwufuj/29",caption="""
 ✓ 👋 مرحبا بك عزيزي انا بوت اسلامي اقدم صور دينيه وتلاوات باصوات وابدعات شيوخ متعددين 
 لعرض المصحف ارسل رقم الصفحة
