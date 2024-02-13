@@ -11,7 +11,7 @@ is_bot_active = True
 def start(message):
     private = types.InlineKeyboardMarkup()
     button = types.InlineKeyboardButton("✓ تلاوة ", callback_data="quran")
-   buttoon = types.InlineKeyboardButton("✓ صورة دينية ", callback_data="religious")
+    buttoon = types.InlineKeyboardButton("✓ صورة دينية ", callback_data="religious")
     private.add(buttoon)
     private.add(button)   
     bot.send_photo(message.chat.id,"https://t.me/ifuwufuj/29",caption="""
