@@ -38,8 +38,9 @@ def imagez(call):
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
 """)
 
-@bot.message_handler(commands=['starttt'])
-def welcome(message):
+@@bot.callback_query_handler(func=lambda call: True)
+def imagezz(call):
+    if call.data= "starttt":
     name = message.from_user.first_name
     bot.send_message(message.chat.id,"مرحبا بك في قسم المصحف الرجاء ارسال رقم الصفحة لتصفح صفحات القرآن الكريم للرجوع ارسل /start".format(name))
 
