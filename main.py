@@ -11,7 +11,7 @@ is_bot_active = True
 def start(message):
     private = types.InlineKeyboardMarkup()
     button = types.InlineKeyboardButton("✓ تلاوة ", callback_data="quran")
-    buttoon = types.InlineKeyboardButton("✓ صورة دينية ", callback_data="religious")
+    buttoon = types.InlineKeyboardButton("المصحف", callback_data="starttt")
     butteon = types.InlineKeyboardButton("مطور البوت", url="https://t.me/Almortagel_12")
     private.add(button,buttoon)
     private.add(butteon)   
@@ -38,6 +38,11 @@ def imagez(call):
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
 """)
 
+@bot.message_handler(commands=['starttt'])
+def welcome(message):
+    name = message.from_user.first_name
+    bot.send_message(message.chat.id,"مرحبا بك في قسم المصحف الرجاء ارسال رقم الصفحة لتصفح صفحات القرآن الكريم للرجوع ارسل /start".format(name))
+
 @bot.message_handler(func=lambda message: True)
 def all(message):
     try:
@@ -46,13 +51,11 @@ def all(message):
 
             keyboard = types.InlineKeyboardMarkup()
             cou = types.InlineKeyboardButton(text=f"• {num} •", callback_data="couu")
-            previous = types.InlineKeyboardButton("صفحة السابقة", callback_data=str(num - 1))
-            next = types.InlineKeyboardButton("صفحة التالية", callback_data=str(num + 1))
-            nextt = types.InlineKeyboardButton(" رجوع للقائمة الرئيسيه", callback_data="start")
+            previous = types.InlineKeyboardButton(text="صفحة السابقة", callback_data=str(num - 1))
+            next = types.InlineKeyboardButton(text="صفحة التالية", callback_data=str(num + 1))
 
             keyboard.row(cou)
             keyboard.row(previous,next)
-            keyboard.row(nextt)
 
             bot.send_photo(message.chat.id,url, reply_markup=keyboard)
     except:
@@ -70,17 +73,15 @@ def alll(call):
     keyboard = types.InlineKeyboardMarkup()
 
     cou = types.InlineKeyboardButton(text=f"• {num} •", callback_data="couu")
-    previous = types.InlineKeyboardButton("صفحة السابقة", callback_data=str(num - 1))
-    next = types.InlineKeyboardButton("صفحة التالية", callback_data=str(num + 1))
-    nextt = types.InlineKeyboardButton(" رجوع للقائمة الرئيسيه", callback_data="start")
+    previous = types.InlineKeyboardButton(text="صفحة السابقة", callback_data=str(num - 1))
+    next = types.InlineKeyboardButton(text="صفحة التالية", callback_data=str(num + 1))
 
 
     keyboard.row(cou)
     keyboard.row(previous,next)
-    keyboard.row(nextt)
-
 
     bot.edit_message_media(types.InputMediaPhoto(url), call.message.chat.id, call.message.message_id,reply_markup=keyboard)
+    
     
 print("\033[4;35m-"*10)
 print("\033[1;33m• Running..... /start ")
