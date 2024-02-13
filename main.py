@@ -45,8 +45,8 @@ def all(message):
 
             keyboard = types.InlineKeyboardMarkup()
             cou = types.InlineKeyboardButton(text=f"• {num} •", callback_data="couu")
-            previous = types.InlineKeyboardButton(text="صفحة السابقة", callback_data=str(num - 1))
-            next = types.InlineKeyboardButton(text="صفحة التالية", callback_data=str(num + 1))
+            previous = types.InlineKeyboardButton("صفحة السابقة", callback_data=str(num - 1))
+            next = types.InlineKeyboardButton("صفحة التالية", callback_data=str(num + 1))
             nextt = types.InlineKeyboardButton(" رجوع للقائمة الرئيسيه", callback_data="start")
 
             keyboard.row(cou)
@@ -69,8 +69,8 @@ def alll(call):
     keyboard = types.InlineKeyboardMarkup()
 
     cou = types.InlineKeyboardButton(text=f"• {num} •", callback_data="couu")
-    previous = types.InlineKeyboardButton(text="صفحة السابقة", callback_data=str(num - 1))
-    next = types.InlineKeyboardButton(text="صفحة التالية", callback_data=str(num + 1))
+    previous = types.InlineKeyboardButton("صفحة السابقة", callback_data=str(num - 1))
+    next = types.InlineKeyboardButton("صفحة التالية", callback_data=str(num + 1))
     nextt = types.InlineKeyboardButton(" رجوع للقائمة الرئيسيه", callback_data="start")
 
 
