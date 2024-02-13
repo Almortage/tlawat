@@ -10,7 +10,7 @@ is_bot_active = True
 @bot.message_handler(commands=["start"])
 def start(message):
     private = types.InlineKeyboardMarkup()
-    button = types.InlineKeyboardButton("✓ تلاوة ", callback_data="quran"),("✓ صورة دينية ", callback_data="religious")
+    button = types.InlineKeyboardButton("✓ تلاوة ", callback_data="quran","✓ صورة دينية ", callback_data="religious")
     private.add(button)   
     bot.send_photo(message.chat.id,"https://t.me/ifuwufuj/29",caption="""
 ✓ 👋 مرحبا بك عزيزي انا بوت اسلامي اقدم صور دينيه وتلاوات باصوات وابدعات شيوخ متعددين 
