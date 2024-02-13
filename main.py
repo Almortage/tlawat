@@ -1,4 +1,5 @@
 import asyncio
+from config import Config
 from pyrogram import Client, filters
 from random import choice
 from pyrogram import filters
@@ -14,7 +15,7 @@ app = Client(
     "Adhan",
     api_id=14911221,
     api_hash="a5e14021456afd496e7377331e2e5bcf",
-    bot_token= "TG_BOT_TOKEN",
+    bot_token= Config.TG_BOT_TOKEN
     is_bot_active = True  
 )
 
