@@ -47,10 +47,11 @@ def all(message):
             cou = types.InlineKeyboardButton(text=f"• {num} •", callback_data="couu")
             previous = types.InlineKeyboardButton(text="صفحة السابقة", callback_data=str(num - 1))
             next = types.InlineKeyboardButton(text="صفحة التالية", callback_data=str(num + 1))
-            nextt = types.InlineKeyboardButton(text="رجوع للصفحه الرئيسيه", callback_data="start")
+            nextt = types.InlineKeyboardButton(" رجوع للقائمة الرئيسيه", callback_data="start")
 
             keyboard.row(cou)
-            keyboard.row(previous,next,nextt)
+            keyboard.row(previous,next)
+            keyboard.row(nextt)
 
             bot.send_photo(message.chat.id,url, reply_markup=keyboard)
     except:
@@ -70,11 +71,13 @@ def alll(call):
     cou = types.InlineKeyboardButton(text=f"• {num} •", callback_data="couu")
     previous = types.InlineKeyboardButton(text="صفحة السابقة", callback_data=str(num - 1))
     next = types.InlineKeyboardButton(text="صفحة التالية", callback_data=str(num + 1))
-    nextt = types.InlineKeyboardButton(text="رجوع للصفحه الرئيسيه", callback_data="start")
+    nextt = types.InlineKeyboardButton(" رجوع للقائمة الرئيسيه", callback_data="start")
 
 
     keyboard.row(cou)
-    keyboard.row(previous,next,naxtt)
+    keyboard.row(previous,next)
+    keyboard.row(nextt)
+
 
     bot.edit_message_media(types.InputMediaPhoto(url), call.message.chat.id, call.message.message_id,reply_markup=keyboard)
     
