@@ -38,7 +38,7 @@ def imagez(call):
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
 """)
 
-@bot.message_handler(commands="starttt")
+@bot.message_handler(commands=["starttt"])
 def starttt(message):
         bot.send_photo(message.chat.id, "https://telegra.ph/file/0930a46d71a2731c5e5fb.jpg",caption="""مرحبا بك في قسم المصحف الرجاء ارسال رقم الصفحة لتصفح صفحات القرآن الكريم للرجوع ارسل /start
 """)
