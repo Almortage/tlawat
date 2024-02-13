@@ -46,10 +46,10 @@ def all(message):
             cou = types.InlineKeyboardButton(text=f"• {num} •", callback_data="couu")
             previous = types.InlineKeyboardButton(text="صفحة السابقة", callback_data=str(num - 1))
             next = types.InlineKeyboardButton(text="صفحة التالية", callback_data=str(num + 1))
-            nextt = types.InlineKeyboardButton(text="رجوع للصفحه الرئيسيه", callback_data="رجوع")
+            nextt = types.InlineKeyboardButton(text="رجوع للصفحه الرئيسيه", callback_data="start")
 
             keyboard.row(cou)
-            keyboard.row(previous,next)
+            keyboard.row(previous,next,nextt)
 
             bot.send_photo(message.chat.id,url, reply_markup=keyboard)
     except:
@@ -69,7 +69,7 @@ def alll(call):
     cou = types.InlineKeyboardButton(text=f"• {num} •", callback_data="couu")
     previous = types.InlineKeyboardButton(text="صفحة السابقة", callback_data=str(num - 1))
     next = types.InlineKeyboardButton(text="صفحة التالية", callback_data=str(num + 1))
-    nextt = types.InlineKeyboardButton(text="رجوع للصفحه الرئيسيه", callback_data="رجوع")
+    nextt = types.InlineKeyboardButton(text="رجوع للصفحه الرئيسيه", callback_data="start")
 
 
     keyboard.row(cou)
