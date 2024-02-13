@@ -3,8 +3,6 @@ from config import Config
 from pyrogram import Client, filters
 from random import choice
 from pyrogram import filters
-from strings import get_command
-from strings.filters import command
 from config import BANNED_USERS
 from typing import Union
 from pyrogram.types import InlineKeyboardButton
