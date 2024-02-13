@@ -13,7 +13,8 @@ def start(message):
     button = types.InlineKeyboardButton("✓ تلاوة ", callback_data="quran")
     buttoon = types.InlineKeyboardButton("خطبة", callback_data="kotab")
     butteon = types.InlineKeyboardButton("مطور البوت", url="https://t.me/Almortagel_12")
-    private.add(button,buttoon)
+    private.add(button)
+    private.add(buttoon)
     private.add(butteon)   
     bot.send_photo(message.chat.id,"https://t.me/ifuwufuj/29",caption="""
 ✓ 👋 مرحبا بك عزيزي انا بوت اسلامي اقدم صور دينيه وتلاوات باصوات وابدعات شيوخ متعددين 
@@ -33,8 +34,8 @@ def tylaoa(call):
 @bot.callback_query_handler(func=lambda call: True)
 def tylaoa(call):
     if call.data == "kotab":
-        voices = "https://t.me/fresdewi/" + str(random.randint(2, 201))
-        bot.send_voice(call.message.chat.id, voices, caption="""
+        voicess = "https://t.me/fresdewi/" + str(random.randint(2, 201))
+        bot.send_voice(call.message.chat.id, voicess, caption="""
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
 """)
 
