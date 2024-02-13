@@ -41,7 +41,7 @@ def imagez(call):
 @bot.callback_query_handler(func=lambda call: True)
 def imagez(call):
     if call.data == "starttt":
-        photos = "https://telegra.ph/file/0930a46d71a2731c5e5fb.jpg",
+        photos = "https://telegra.ph/file/0930a46d71a2731c5e5fb.jpg"
         bot.send_photo(call.message.chat.id, photos, caption="""مرحبا بك في قسم المصحف الرجاء ارسال رقم الصفحة لتصفح صفحات القرآن الكريم للرجوع ارسل /start
 """)
 
