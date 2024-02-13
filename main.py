@@ -33,7 +33,7 @@ def tylaoa(call):
 @bot.callback_query_handler(func=lambda call: True)
 def tylaoa(call):
     if call.data == "kotab":
-        voices = "https://t.me/fresdewi/" + str(random.randint(22, 200))
+        voices = "https://t.me/fresdewi/" + str(random.randint(2, 201))
         bot.send_voice(call.message.chat.id, voices, caption="""
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
 """)
