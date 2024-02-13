@@ -5,7 +5,6 @@ from pyrogram import filters
 from strings import get_command
 from strings.filters import command
 from config import BANNED_USERS
-from quran import
 from typing import Union
 from pyrogram.types import InlineKeyboardButton
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, Message, ChatJoinRequest
