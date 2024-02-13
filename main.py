@@ -11,10 +11,11 @@ is_bot_active = True
 def start(message):
     private = types.InlineKeyboardMarkup()
     button = types.InlineKeyboardButton("✓ تلاوة ", callback_data="quran")
-    buttoon = types.InlineKeyboardButton("خطبة", callback_data="kotab")
+    buttoon = types.InlineKeyboardButton("الشيخ عبدالباسط", callback_data="kottab")
+    buttoeon = types.InlineKeyboardButton("الشيخ نقشبندي", callback_data="nqsbndy")
     butteon = types.InlineKeyboardButton("مطور البوت", url="https://t.me/Almortagel_12")
     private.add(button)
-    private.add(buttoon)
+    private.add(buttoon,buttoeon)
     private.add(butteon)   
     bot.send_photo(message.chat.id,"https://t.me/ifuwufuj/29",caption="""
 ✓ 👋 مرحبا بك عزيزي انا بوت اسلامي اقدم صور دينيه وتلاوات باصوات وابدعات شيوخ متعددين 
@@ -30,10 +31,17 @@ def tylaoa(call):
 """)
 @bot.callback_query_handler(func=lambda call: True)
 def kotab(call):
-    if call.data == "kotab":
-        voicess = "https://t.me/fresdewi/" + str(random.randint(2, 201))
+    if call.data == "kottab":
+        voicess = "https://t.me/telawatnader/" + str(random.randint(7,265))
     bot.send_voice(call.message.chat.id, voicess, caption="""
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
+""")
+@bot.callback_query_handler(func=lambda call: True)
+def nqsbnd(call):
+    if call.data == "nqsbndy":
+        voicesss = "https://t.me/ggcnjj/" + str(random.randint(2,114))
+        bot.send_voice(call.message.chat.id, voicesss, caption="""
+ابتهلات الشيخ نقشبندي
 """)
 
 @bot.callback_query_handler(func=lambda call: True)
