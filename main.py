@@ -11,7 +11,7 @@ is_bot_active = True
 def start(message):
     private = types.InlineKeyboardMarkup()
     button = types.InlineKeyboardButton("✓ تلاوة ", callback_data="quran")
-    buttoon = types.InlineKeyboardButton("المصحف", callback_data="starttt")
+    buttoon = types.InlineKeyboardButton("خطبة", callback_data="kotab")
     butteon = types.InlineKeyboardButton("مطور البوت", url="https://t.me/Almortagel_12")
     private.add(button,buttoon)
     private.add(butteon)   
@@ -31,10 +31,10 @@ def tylaoa(call):
 
 
 @bot.callback_query_handler(func=lambda call: True)
-def imagez(call):
-    if call.data == "religious":
-        photos = "https://t.me/livequrann/" + str(random.randint(22, 221))
-        bot.send_photo(call.message.chat.id, photos, caption="""
+def tylaoa(call):
+    if call.data == "kotab":
+        voices = "https://t.me/fresdewi/" + str(random.randint(22, 200))
+        bot.send_voice(call.message.chat.id, voices, caption="""
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
 """)
 
