@@ -38,16 +38,12 @@ def imagez(call):
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
 """)
 
-@bot.message_handler(func=lambda call: True)
+@bot.callback_query_handler(func=lambda call: True)
 def starttt(call):
     if call.data == "starttt":
-    private = types.InlineKeyboardMarkup() 
-    butteonn = types.InlineKeyboardButton("مطور البوت", url="https://t.me/Almortagel_12")
-    private.add(butteonn)      
-
-bot.send_message(message.chat.id,caption="""
+       bot.send_message(message.chat.id,caption="""
 مرحبا بك في قسم المصحف الرجاء ارسال رقم الصفحة لتصفح صفحات القرآن الكريم للرجوع ارسل /start
-""", reply_markup=private)
+""")
 
 @bot.message_handler(func=lambda message: True)
 def all(message):
