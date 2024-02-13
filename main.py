@@ -71,7 +71,7 @@ async def ihd(client: Client, message: Message):
         )
     )
     
-    @app.on_message(command(["سوره", "قران"]))
+@app.on_message(command(["سوره", "قران"]))
 async def ihd(client: Client, message: Message):
     rl = random.randint(2,82)
     url = f"https://t.me/opuml/{rl}"
