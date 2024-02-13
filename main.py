@@ -1,161 +1,94 @@
-import asyncio
 from config import Config
-from pyrogram import Client, filters
-from random import choice
-from pyrogram import filters
-from typing import Union
-from pyrogram.types import InlineKeyboardButton
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove, Message, ChatJoinRequest
+import os
+import telebot, requests, random, re 
+from telebot import types 
+
+tok = Config.TG_BOT_TOKEN
+
+bot = telebot.TeleBot(tok)
+is_bot_active = True  
+@bot.message_handler(commands=["start"])
+def start(message):
+    private = types.InlineKeyboardMarkup()
+    button = types.InlineKeyboardButton("✓ تلاوة ", callback_data="quran")
+    buttoon = types.InlineKeyboardButton("خطبة", callback_data="kotab")
+    butteon = types.InlineKeyboardButton("مطور البوت", url="https://t.me/Almortagel_12")
+    private.add(button)
+    private.add(buttoon)
+    private.add(butteon)   
+    bot.send_photo(message.chat.id,"https://t.me/ifuwufuj/29",caption="""
+✓ 👋 مرحبا بك عزيزي انا بوت اسلامي اقدم صور دينيه وتلاوات باصوات وابدعات شيوخ متعددين 
+لعرض المصحف ارسل رقم الصفحة
+✓ 🔍 انقر على الزر ادناة لارسال القران
+""", reply_markup=private)
+@bot.callback_query_handler(func=lambda call: True)
+def tylaoa(call):
+    if call.data == "quran":
+        voices = "https://t.me/ALMORTAGELRSK/" + str(random.randint(7, 276))
+        bot.send_voice(call.message.chat.id, voices, caption="""
+✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
+""")
+@bot.callback_query_handler(func=lambda call: True)
+def kotab(call):
+    if call.data == "kotab":
+        voicess = "https://t.me/fresdewi/" + str(random.randint(2, 201))
+    bot.send_voice(call.message.chat.id, voicess, caption="""
+✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
+""")
+
+@bot.callback_query_handler(func=lambda call: True)
+def starttt(call):
+    if call.data == "starttt":
+       bot.send_message(message.chat.id,caption="""
+مرحبا بك في قسم المصحف الرجاء ارسال رقم الصفحة لتصفح صفحات القرآن الكريم للرجوع ارسل /start
+""")
+
+@bot.message_handler(func=lambda message: True)
+def all(message):
+    try:
+            num = int(message.text)
+            url = "https://quran.ksu.edu.sa/png_big/" + str(num) + ".png"
+
+            keyboard = types.InlineKeyboardMarkup()
+            cou = types.InlineKeyboardButton(text=f"• {num} •", callback_data="couu")
+            previous = types.InlineKeyboardButton(text="صفحة السابقة", callback_data=str(num - 1))
+            next = types.InlineKeyboardButton(text="صفحة التالية", callback_data=str(num + 1))
+
+            keyboard.row(cou)
+            keyboard.row(previous,next)
+
+            bot.send_photo(message.chat.id,url, reply_markup=keyboard)
+    except:
+            pass
+            bot.reply_to(message,'error')
+
+@bot.callback_query_handler(func=lambda call: True)
+def alll(call):
+    if call.data == 'couu':
+     bot.answer_callback_query(call.id, text='هذا زر يعرض فيه العدد فقط')
+     exit()
+    num = int(call.data)
+    url = "https://quran.ksu.edu.sa/png_big/" + str(num) + ".png"
+
+    keyboard = types.InlineKeyboardMarkup()
+
+    cou = types.InlineKeyboardButton(text=f"• {num} •", callback_data="couu")
+    previous = types.InlineKeyboardButton(text="صفحة السابقة", callback_data=str(num - 1))
+    next = types.InlineKeyboardButton(text="صفحة التالية", callback_data=str(num + 1))
 
 
-app = Client(
-    "Adhan",
-    api_id=14911221,
-    api_hash="a5e14021456afd496e7377331e2e5bcf",
-    bot_token="TG_BOT_TOKEN",
-    is_bot_active = True  
-)
+    keyboard.row(cou)
+    keyboard.row(previous,next)
+
+    bot.edit_message_media(types.InputMediaPhoto(url), call.message.chat.id, call.message.message_id,reply_markup=keyboard)
 
 
-REPLY_MESSAGE = "**🧑🏻‍✈️︙اهلا بك  عزيزي في بوت القران الكريم**"
-
-REPLY_MESSAGE_BUTTONS = [
-    [
-             ("اذكار"),
-          ],
-          [
-             ("قران"),
-              ("نقشبندي")
-          ],
-          [
-              ("عبدالباسط"),
-              ("تلاوات")
-          ],
-          [           
-        ("❎ ¦ حذف الكيبورد")
-    ]
-]
-
-@app.on_message(command("/start") & filters.private & ~filters.edited)
-async def almortagel(client: Client, message: Message): 
-    text = REPLY_MESSAGE
-    reply_markup = ReplyKeyboardMarkup(REPLY_MESSAGE_BUTTONS, one_time_keyboard=True, resize_keyboard=True)
-    await message.reply(
-        text=text,
-        reply_markup=reply_markup
-    )
-
-
-@app.on_message(command("❎ ¦ حذف الكيبورد") & filters.private & ~filters.edited)
-async def upbkgt(client: Client, message: Message):
-    await message.reply_text(
-        text="""❎ ¦ تم حذف الكيبورد بنجاح""",
-        reply_markup=ReplyKeyboardRemove()
-    )
-
-@app.on_message(command(["تلاوات", "تلاوة"]))
-async def ihd(client: Client, message: Message):
-    rl = random.randint(24,618)
-    url = f"https://t.me/EIEI06/{rl}"
-    await client.send_voice(message.chat.id,url,caption="🥹♥ ¦ تـم اختيـار تلاوة قرآنيه لـك",parse_mode="html",
-    reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        message.from_user.first_name, url=f"https://t.me/{message.from_user.username}")
-                ],
-            ]
-        )
-    )
-    
-@app.on_message(command(["سوره", "قران"]))
-async def ihd(client: Client, message: Message):
-    rl = random.randint(2,82)
-    url = f"https://t.me/opuml/{rl}"
-    await client.send_voice(message.chat.id,url,caption="🥹♥ ¦ تـم اختيـار ايـه قرآنيه لـك",parse_mode="html",
-    reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        message.from_user.first_name, url=f"https://t.me/{message.from_user.username}")
-                ],
-            ]
-        )
-    )
-
-@app.on_message(command(["الشيخ", "النقشبندي", "نقشبندي"]))
-async def ihd(client: Client, message: Message):
-    rl = random.randint(2,114)
-    url = f"https://t.me/ggcnjj/{rl}"
-    await client.send_voice(message.chat.id,url,caption="🥹♥ ¦ تـم اختيـار الشيخ نقشبندي لـك",parse_mode="html",
-    reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        message.from_user.first_name, url=f"https://t.me/{message.from_user.username}")
-                ],
-            ]
-        )
-    )
-    
-@app.on_message(command(["عبدالباسط", "عبدالباسط عبدالصمد"]))
-async def ihd(client: Client, message: Message):
-    rl = random.randint(7,265)
-    url = f"https://t.me/telawatnader/{rl}"
-    await client.send_voice(message.chat.id,url,caption="🥹♥ ¦ تـم اختيـار الشيخ عبدالباسط لـك",parse_mode="html",
-    reply_markup=InlineKeyboardMarkup(
-            [
-                [
-                    InlineKeyboardButton(
-                        message.from_user.first_name, url=f"https://t.me/{message.from_user.username}")
-                ],
-            ]
-        )
-    )
-    
-    txt = [
-
-
-"االلَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ , وَشُكْرِكَ , وَحُسْنِ عِبَادَتِكَ🎈💞 ",
-"من الأدعية النبوية المأثورة:اللهمَّ زَيِّنا بزينة الإيمان",
-"اااللهم يا من رويت الأرض مطرا أمطر قلوبنا فرحا 🍂 ",
-"اا‏اللَّهُـمَّ لَڪَ الحَمْـدُ مِنْ قَـا؏ِ الفُـؤَادِ إلىٰ ؏َـرشِڪَ المُقـدَّس حَمْـدَاً يُوَافِي نِـ؏ـمَڪ 💙🌸",
-"﴿وَاذْكُرِ اسْمَ رَبِّكَ وَتَبَتَّلْ إِلَيْهِ تَبْتِيلًا﴾🌿✨",
-"﴿وَمَن يَتَّقِ اللهَ يُكَفِّرْ عَنْهُ سَيِّئَاتِهِ وَيُعْظِمْ لَهُ أَجْرًا﴾",
-"«سُبْحَانَ اللهِ ، وَالحَمْدُ للهِ ، وَلَا إلَهَ إلَّا اللهُ ، وَاللهُ أكْبَرُ ، وَلَا حَوْلَ وَلَا قُوَّةَ إلَّا بِاللهِ»🍃",
-"وذُنُوبًا شوَّهتْ طُهْرَ قُلوبِنا؛ اغفِرها يا ربّ واعفُ عنَّا ❤️",
-"«اللَّهُمَّ اتِ نُفُوسَنَا تَقْوَاهَا ، وَزَكِّهَا أنْتَ خَيْرُ مَنْ زَكَّاهَا ، أنْتَ وَلِيُّهَا وَمَوْلَاهَا»🌹",
-"۝‏﷽إن اللَّه وملائكته يُصلُّون على النبي ياأيُّها الذين امنوا صلُّوا عليه وسلِّموا تسليما۝",
-"فُسِبًحً بًحًمًدٍ ربًکْ وٌکْنِ مًنِ الَسِاجّدٍيَنِ 🌿✨",
-"اأقُمً الَصّلَاةّ لَدٍلَوٌکْ الَشُمًسِ إلَيَ غُسِقُ الَلَيَلَ🥀🌺",
-"نِسِتٌغُفُرکْ ربًيَ حًيَتٌ تٌلَهّيَنِا الَدٍنِيَا عٌنِ ذِکْرکْ🥺😢",
-"وٌمًنِ أعٌرض عٌنِ ذِکْريَ فُإنِ لَهّ مًعٌيَشُةّ ضنِکْا 😢",
-"وٌقُرأنِ الَفُجّر إنِ قُرانِ الَفُجّر کْانِ مًشُهّوٌدٍا🎀🌲",
-"اأّذّأّ أّلَدِنِيِّأّ نَِّستّګوِ أّصٌلَګوِ زِّوِروِ أّلَمَقِأّبِر💔",
-"حًتٌيَ لَوٌ لَمًتٌتٌقُنِ الَخِفُظُ فُمًصّاحًبًتٌ لَلَقُرانِ تٌجّعٌلَکْ مًنِ اهّلَ الَلَهّ وٌخِاصّتٌهّ❤🌱",
-"وٌإذِا رضيَتٌ وٌصّبًرتٌ فُهّوٌ إرتٌقُاء وٌنِعٌمًةّ✨??",
-"«ربً اجّعٌلَنِيَ مًقُيَمً الَصّلَاةّ وٌمًنِ ذِريَتٌيَ ربًنِا وٌتٌقُبًلَ دٍعٌاء 🤲",
-"ااعٌلَمً انِ رحًلَةّ صّبًرکْ لَهّا نِهّايَهّ عٌظُيَمًهّ مًحًمًلَهّ بًجّوٌائزٍ ربًانِيَهّ مًدٍهّشُهّ🌚☺️",
-"اإيَاکْ وٌدٍعٌوٌةّ الَمًظُلَوٌمً فُ إنِهّا تٌصّعٌدٍ الَيَ الَلَهّ کْأنِهّا شُرارهّ مًنِ نِار 🔥🥺",
-"االَلَهّمً انِقُذِ صّدٍوٌرنِا مًنِ هّيَمًنِهّ الَقُلَقُ وٌصّبً عٌلَيَهّا فُيَضا مًنِ الَطِمًأنِيَنِهّ✨🌺",
-"يَابًنِيَ إنِ صّلَاح الَحًيَاةّ فُ أتٌجّاهّ الَقُبًلَهّ 🥀🌿",
-"الَلَهّمً ردٍنِا إلَيَکْ ردٍا جّمًيَلَا💔🥺",
-
-
-        ]
-
-
-        
-
-
-@app.on_message(command(["اذكار","اذكار"]))
-
-async def akar(client: Client, message: Message):
-
-      a = random.choice(txt)
-
-      await message.reply(
-
-        f"{a}")
-    
-app.polling()
+print("\033[4;35m-"*10)
+print("\033[1;33m• Running..... /start ")
+print("\033[4;35m-"*10)
+bot.polling(none_stop=True)
+"""
+Dev /- @Almortagel_12
+Ch /- @AlmortagelTech
+In /- 2024/2/12
+"""
