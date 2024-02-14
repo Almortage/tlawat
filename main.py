@@ -7,7 +7,6 @@ from config import Config
 import asyncio 
 from pyrogram import Client, filters, idle
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, BotCommand
-from kvsqlite.sync import Client as DB
 from datetime import date
 from pyrogram.errors import FloodWait 
 botdb = DB('botdb.sqlite')
