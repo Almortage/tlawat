@@ -89,7 +89,7 @@ def alll(call):
     bot.edit_message_media(types.InputMediaPhoto(url), call.message.chat.id, call.message.message_id,reply_markup=keyboard)
 
 @bot.message_handler(func=lambda message: True)
- def msgs(message):
+def msgs(message):
     text = message.text
     if text == "عبدالباسط" or date == "nkssd":
         voice_url = "https://t.me/telawatnader/" + str(random.randint(7, 265))
