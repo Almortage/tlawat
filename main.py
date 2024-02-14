@@ -11,8 +11,8 @@ is_bot_active = True
 def start(message):
     private = types.InlineKeyboardMarkup()
     button = types.InlineKeyboardButton("✓ تلاوة ", callback_data="quran")
-    buttoon = types.InlineKeyboardButton("الشيخ عبدالباسط", callback_data="kottab")
-    buttoeon = types.InlineKeyboardButton("الشيخ نقشبندي", callback_data="nqsbndy")
+    buttoon = types.InlineKeyboardButton("الشيخ عبدالباسط", callback_data="nkssd")
+    buttoeon = types.InlineKeyboardButton("الشيخ نقشبندي", callback_data="nksd")
     butteon = types.InlineKeyboardButton("مطور البوت", url="https://t.me/Almortagel_12")
     private.add(button)
     private.add(buttoon,buttoeon)
@@ -87,6 +87,24 @@ def alll(call):
     keyboard.row(previous,next)
 
     bot.edit_message_media(types.InputMediaPhoto(url), call.message.chat.id, call.message.message_id,reply_markup=keyboard)
+
+@bot.message_handler(func=lambda message: True)
+def msgs(message):
+    text = message.text
+    if text == "عبدالباسط" or date == "nkssd":
+        voice_url = "https://t.me/telawatnader/" + str(random.randint(7, 265))
+        bot.send_voice(message.chat.id, voice_url, caption="🥹♥ ¦ تـم اختيـار الشيخ عبدالباسط لـك", reply_to_message_id=message.message_id, reply_markup=telebot.types.InlineKeyboardMarkup().row(
+            telebot.types.InlineKeyboardButton('✧ - المطور 🌐', url='https://t.me/Almortagel_12'),
+            telebot.types.InlineKeyboardButton('✧ - قناة مطور البوت', url='https://t.me/AlmortagelTech')
+            
+@bot.message_handler(func=lambda message: True)
+def msgs(message):
+    text = message.text
+    if text == "نقشبندي" or date == "nksd":
+        voice_url = "https://t.me/ggcnjj/" + str(random.randint(2, 114))
+        bot.send_voice(message.chat.id, voice_url, caption="🥹♥ ¦ تـم اختيـار الشيخ نقشبندي لـك", reply_to_message_id=message.message_id, reply_markup=telebot.types.InlineKeyboardMarkup().row(
+            telebot.types.InlineKeyboardButton('✧ - المطور 🌐', url='https://t.me/Almortagel_12'),
+            telebot.types.InlineKeyboardButton('✧ - قناة مطور البوت', url='https://t.me/AlmortagelTech')  
 
 
 print("\033[4;35m-"*10)
