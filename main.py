@@ -93,9 +93,7 @@ def msgs(message):
     text = message.text
     if text == "عبدالباسط" or date == "nkssd":
         voice_url = "https://t.me/telawatnader/" + str(random.randint(7, 265))
-        bot.send_voice(message.chat.id, voice_url, caption="🥹♥ ¦ تـم اختيـار الشيخ عبدالباسط لـك", reply_to_message_id=message.message_id, reply_markup=telebot.types.InlineKeyboardMarkup().row(
-            telebot.types.InlineKeyboardButton('✧ - المطور 🌐', url='https://t.me/Almortagel_12'),
-            telebot.types.InlineKeyboardButton('✧ - قناة مطور البوت', url='https://t.me/AlmortagelTech')
+        bot.send_voice(message.chat.id, voice_url, caption="🥹♥ ¦ تـم اختيـار الشيخ عبدالباسط لـك")
             
 print("\033[4;35m-"*10)
 print("\033[1;33m• Running..... /start ")
