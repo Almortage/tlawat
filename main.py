@@ -9,7 +9,6 @@ from pyrogram import Client, filters, idle
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, BotCommand
 from datetime import date
 from pyrogram.errors import FloodWait 
-botdb = DB('botdb.sqlite')
 from pyrogram.types import ReplyKeyboardMarkup, ReplyKeyboardRemove, KeyboardButton
 from pyrogram.errors import SessionPasswordNeeded, PhoneCodeExpired
 from pyrogram.errors.exceptions.bad_request_400 import PasswordHashInvalid
