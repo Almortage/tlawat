@@ -97,16 +97,6 @@ def alll(call):
             telebot.types.InlineKeyboardButton('✧ - المطور 🌐', url='https://t.me/Almortagel_12'),
             telebot.types.InlineKeyboardButton('✧ - قناة مطور البوت', url='https://t.me/AlmortagelTech')
             
-@bot.message_handler(func=lambda message: True)
-def mssgs(message):
-    text = message.text
-    if text == "نقشبندي" or date == "nksd":
-        voice_url = "https://t.me/ggcnjj/" + str(random.randint(2, 114))
-        bot.send_voice(message.chat.id, voice_url, caption="🥹♥ ¦ تـم اختيـار الشيخ نقشبندي لـك", reply_to_message_id=message.message_id, reply_markup=telebot.types.InlineKeyboardMarkup().row(
-            telebot.types.InlineKeyboardButton('✧ - المطور 🌐', url='https://t.me/Almortagel_12'),
-            telebot.types.InlineKeyboardButton('✧ - قناة مطور البوت', url='https://t.me/AlmortagelTech')  
-
-
 print("\033[4;35m-"*10)
 print("\033[1;33m• Running..... /start ")
 print("\033[4;35m-"*10)
