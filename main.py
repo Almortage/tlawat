@@ -10,13 +10,11 @@ is_bot_active = True
 @bot.message_handler(commands=["start"])
 def start(message):
     private = types.InlineKeyboardMarkup()
-    button = types.InlineKeyboardButton("✓ تلاوة ", callback_data="quran")
-    buttoon = types.InlineKeyboardButton("الشيخ عبدالباسط", callback_data="quran")
-    buttoeon = types.InlineKeyboardButton("الشيخ نقشبندي", callback_data="quran")
+    button = types.InlineKeyboardButton("كتب دينية ", callback_data="quran")
     butteon = types.InlineKeyboardButton("مطور البوت", url="https://t.me/Almortagel_12")
+    buttoon = types.InlineKeyboardButton("قناة البوت", url="https://t.me/AlmortagelTech")
     private.add(button)
-    private.add(buttoon,buttoeon)
-    private.add(butteon)   
+    private.add(butteon,buttoon)   
     bot.send_photo(message.chat.id,"https://t.me/ifuwufuj/29",caption="""
 ✓ 👋 مرحبا بك عزيزي انا بوت اسلامي اقدم صور دينيه وتلاوات باصوات وابدعات شيوخ متعددين 
 لعرض المصحف ارسل رقم الصفحة
@@ -25,8 +23,8 @@ def start(message):
 @bot.callback_query_handler(func=lambda call: True)
 def tylaoa(call):
     if call.data == "quran":
-        voices = "https://t.me/ALMORTAGELRSK/" + str(random.randint(7, 276))
-        bot.send_voice(call.message.chat.id, voices, caption="""
+        voices = "https://t.me/kotobeslameah/" + str(random.randint(2, 2020))
+        bot.send_pdf(call.message.chat.id, voices, caption="""
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
 """)
 @bot.callback_query_handler(func=lambda call: True)
@@ -95,12 +93,10 @@ def msgs(message):
         voice_url = "https://t.me/telawatnader/" + str(random.randint(7, 265))
         bot.send_voice(message.chat.id, voice_url, caption="🥹♥ ¦ تـم اختيـار الشيخ عبدالباسط لـك")
             
-print("\033[4;35m-"*10)
-print("\033[1;33m• Running..... /start ")
-print("\033[4;35m-"*10)
+print("تم تشغيل البوت اذا وقف معك شي تواصل معي @Almortagel_12")
 bot.polling(none_stop=True)
 """
 Dev /- @Almortagel_12
 Ch /- @AlmortagelTech
-In /- 2024/2/12
+In /- 2024/2/14
 """
