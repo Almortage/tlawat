@@ -98,7 +98,7 @@ def msgs(message):
             telebot.types.InlineKeyboardButton('✧ - قناة مطور البوت', url='https://t.me/AlmortagelTech')
             
 @bot.message_handler(func=lambda message: True)
-def msgs(message):
+def mssgs(message):
     text = message.text
     if text == "نقشبندي" or date == "nksd":
         voice_url = "https://t.me/ggcnjj/" + str(random.randint(2, 114))
