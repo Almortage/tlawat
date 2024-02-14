@@ -3,20 +3,19 @@ import os
 import telebot, requests, random
 from telebot import types 
 
-from telethon import TelegramClient
-from telethon import __version__ as v2
-from telethon.sessions import StringSession
-from telethon.errors import (
-    PhoneNumberInvalidError,
-    PhoneCodeInvalidError,
-    PhoneCodeExpiredError,
-    SessionPasswordNeededError,
-    PasswordHashInvalidError
-)
-from pyromod import listen
-from pyrogram import (
-    __version__ as v
-)
+from config import Config 
+import asyncio 
+from pyrogram import Client, filters, idle
+from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, BotCommand
+from kvsqlite.sync import Client as DB
+from datetime import date
+from pyrogram.errors import FloodWait 
+botdb = DB('botdb.sqlite')
+from pyrogram.types import ReplyKeyboardMarkup, ReplyKeyboardRemove, KeyboardButton
+from pyrogram.errors import SessionPasswordNeeded, PhoneCodeExpired
+from pyrogram.errors.exceptions.bad_request_400 import PasswordHashInvalid
+from pyrogram.errors.exceptions.not_acceptable_406 import PhoneNumberInvalid
+from pyrogram.errors.exceptions.bad_request_400 import PhoneCodeInvalid
 
 #حقوق احمد @H1HHIH - @Almortagel_12
 # تطوير مودي الهيبه اذا ما ذكرت مصدر بنحكح امك @Almortagel_12 - @SOURCE_ZE 
