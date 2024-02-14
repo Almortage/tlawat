@@ -11,8 +11,8 @@ is_bot_active = True
 def start(message):
     private = types.InlineKeyboardMarkup()
     button = types.InlineKeyboardButton("✓ تلاوة ", callback_data="quran")
-    buttoon = types.InlineKeyboardButton("الشيخ عبدالباسط", callback_data="nkssd")
-    buttoeon = types.InlineKeyboardButton("الشيخ نقشبندي", callback_data="nksd")
+    buttoon = types.InlineKeyboardButton("الشيخ عبدالباسط", callback_data="quran")
+    buttoeon = types.InlineKeyboardButton("الشيخ نقشبندي", callback_data="quran")
     butteon = types.InlineKeyboardButton("مطور البوت", url="https://t.me/Almortagel_12")
     private.add(button)
     private.add(buttoon,buttoeon)
