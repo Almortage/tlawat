@@ -38,72 +38,6 @@ mssg = """اهــلا بـك فـي بوت رمضان 😌💚🏮
 
 اختر احد الخيارات الموجوده في الاسفل ❤️☘ """
 linkos = 'https://i.ibb.co/sJNNGFJ/4fa3bb6f84b2.jpg','https://i.ibb.co/8NTK9bV/d30a1d7d6f69.jpg','https://i.ibb.co/FzhHbq7/1dc2c31e902d.jpg','https://i.ibb.co/Jptmqz0/b3e20e7b40a2.jpg','https://i.ibb.co/bXTjCM2/fe383713cf77.jpg','https://i.ibb.co/hY9Kmtf/9b99fa20f016.jpg','https://i.ibb.co/txpf8vr/848f133f3615.jpg','https://i.ibb.co/G2DQhcs/eead1d82ac66.jpg','https://i.ibb.co/LYZ6x7r/cbb062b0cd57.jpg','https://i.ibb.co/ctr1tqp/0582498ec00a.jpg','https://i.ibb.co/zPBbN4T/f9b418d46b52.jpg','https://i.ibb.co/R9mVCF7/34214a9aba03.jpg'
-	
-@bot.callback_query_handler(func=lambda call: True)
-def tylaoa(call):
-    if call.data == "quran":
-        voices = "https://t.me/ALMORTAGELRSK/" + str(random.randint(7, 276))
-        bot.send_voice(call.message.chat.id, voices, caption="""
-✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
-""")
-@bot.callback_query_handler(func=lambda call: True)
-def tylaoa(call):
-    if call.data == "kottab":
-        voicess = "https://t.me/telawatnader/" + str(random.randint(7, 265))
-    bot.send_voice(call.message.chat.id, voicess, caption="""
-✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
-""")
-@bot.callback_query_handler(func=lambda call: True)
-def tylaoa(call):
-    if call.data == "nqsbndy":
-        voicesss = "https://t.me/ggcnjj/" + str(random.randint(2, 114))
-        bot.send_voice(call.message.chat.id, voicesss, caption="""ابتهلات الشيخ نقشبندي""")
-
-@bot.callback_query_handler(func=lambda call: True)
-def starttt(call):
-    if call.data == "starttt":
-       bot.send_message(message.chat.id,caption="""
-مرحبا بك في قسم المصحف الرجاء ارسال رقم الصفحة لتصفح صفحات القرآن الكريم للرجوع ارسل /start
-""")
-
-@bot.message_handler(func=lambda message: True)
-def all(message):
-    try:
-            num = int(message.text)
-            url = "https://quran.ksu.edu.sa/png_big/" + str(num) + ".png"
-
-            keyboard = types.InlineKeyboardMarkup()
-            cou = types.InlineKeyboardButton(text=f"• {num} •", callback_data="couu")
-            previous = types.InlineKeyboardButton(text="صفحة السابقة", callback_data=str(num - 1))
-            next = types.InlineKeyboardButton(text="صفحة التالية", callback_data=str(num + 1))
-
-            keyboard.row(cou)
-            keyboard.row(previous,next)
-
-            bot.send_photo(message.chat.id,url, reply_markup=keyboard)
-    except:
-            pass
-            bot.reply_to(message,'error')
-
-@bot.callback_query_handler(func=lambda call: True)
-def alll(call):
-    if call.data == 'couu':
-     bot.answer_callback_query(call.id, text='هذا زر يعرض فيه العدد فقط')
-     exit()
-    num = int(call.data)
-    url = "https://quran.ksu.edu.sa/png_big/" + str(num) + ".png"
-
-    keyboard = types.InlineKeyboardMarkup()
-
-    cou = types.InlineKeyboardButton(text=f"• {num} •", callback_data="couu")
-    previous = types.InlineKeyboardButton(text="صفحة السابقة", callback_data=str(num - 1))
-    next = types.InlineKeyboardButton(text="صفحة التالية", callback_data=str(num + 1))
-
-
-    keyboard.row(cou)
-    keyboard.row(previous,next)
-
-    bot.edit_message_media(types.InputMediaPhoto(url), call.message.chat.id, call.message.message_id,reply_markup=keyboard)
     
 tok = Config.TG_BOT_TOKEN
 bot = telebot.TeleBot(tok)
@@ -139,11 +73,13 @@ def callback_query(call):
 			ggm = random.choice(suu)
 			bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=ggm,reply_markup=kbbb)
 		elif call.data == 'quran':
-			ggm = random.choice(suu)
-			bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=ggm,reply_markup=kbbbb)
+        voices = "https://t.me/ALMORTAGELRSK/" + str(random.randint(7, 276))
+        bot.send_voice(call.message.chat.id, voices, caption="""
+✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
+""")
 		elif call.data == 'nqsbndy':
-			ggm = random.choice(suu)
-			bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=ggm,reply_markup=kbbbb)	
+			voicesss = "https://t.me/ggcnjj/" + str(random.randint(2, 114))
+        bot.send_voice(call.message.chat.id, voicesss, caption="""ابتهلات الشيخ نقشبندي""")	
 		elif call.data == 'changebios':
 			bio = random.choice(bios)
 			bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=bio,reply_markup=kbs)
