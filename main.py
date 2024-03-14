@@ -27,6 +27,7 @@ kbb = types.InlineKeyboardMarkup()
 kbbb = types.InlineKeyboardMarkup()
 kbbb.add(kb1,kb4)
 kbb.add(kb1,kb3)
+kbbs.add(kb5,kb6)
 k.add(k1,k2)
 k.add(k3)
 k.add(k4)
@@ -74,12 +75,10 @@ def callback_query(call):
 			bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=ggm,reply_markup=kbbb)
 		elif call.data == 'quran':
             voices = "https://t.me/ALMORTAGELRSK/" + str(random.randint(7, 276))
-        bot.send_voice(call.message.chat.id, voices, caption="""
-✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
-""")
+        bot.send_voice(call.message.chat.id, voices, reply_markup=kbbs)
 		elif call.data == 'nqsbndy':
 			voicesss = "https://t.me/ggcnjj/" + str(random.randint(2, 114))
-        bot.send_voice(call.message.chat.id, voicesss, caption="""ابتهلات الشيخ نقشبندي""")	
+        bot.send_voice(call.message.chat.id, voicesss, reply_markup=kbbs)	
 		elif call.data == 'changebios':
 			bio = random.choice(bios)
 			bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=bio,reply_markup=kbs)
