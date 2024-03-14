@@ -149,7 +149,7 @@ def alll(call):
     bot.edit_message_media(types.InputMediaPhoto(url), call.message.chat.id, call.message.message_id,reply_markup=keyboard)
             
 print("تم تشغيل البوت اذا وقف معك شي تواصل معي @Almortagel_12")
-bot.polling()
+bot.polling(none_stop=True)
 """
 Dev /- @Almortagel_12
 Ch /- @AlmortagelTech
