@@ -38,49 +38,6 @@ mssg = """اهــلا بـك فـي بوت رمضان 😌💚🏮
 
 اختر احد الخيارات الموجوده في الاسفل ❤️☘ """
 linkos = 'https://i.ibb.co/sJNNGFJ/4fa3bb6f84b2.jpg','https://i.ibb.co/8NTK9bV/d30a1d7d6f69.jpg','https://i.ibb.co/FzhHbq7/1dc2c31e902d.jpg','https://i.ibb.co/Jptmqz0/b3e20e7b40a2.jpg','https://i.ibb.co/bXTjCM2/fe383713cf77.jpg','https://i.ibb.co/hY9Kmtf/9b99fa20f016.jpg','https://i.ibb.co/txpf8vr/848f133f3615.jpg','https://i.ibb.co/G2DQhcs/eead1d82ac66.jpg','https://i.ibb.co/LYZ6x7r/cbb062b0cd57.jpg','https://i.ibb.co/ctr1tqp/0582498ec00a.jpg','https://i.ibb.co/zPBbN4T/f9b418d46b52.jpg','https://i.ibb.co/R9mVCF7/34214a9aba03.jpg'
-
-tok = Config.TG_BOT_TOKEN
-bot = telebot.TeleBot(tok)
-
-@bot.message_handler(commands=['start'])
-def sttart(message):
-	bot.reply_to(message,mssg,reply_markup=k)
-
-@bot.callback_query_handler(func=lambda call:True)
-def callback_query(call):
-	if call.message:
-		if call.data == 'randphoto':
-			image_url = random.choice(linkos)
-			bot.send_photo(call.message.chat.id, image_url,reply_markup=kb)
-		elif call.data == 'randdoa':
-			ggm = random.choice(suu)
-			bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=ggm,reply_markup=kbbb)
-		elif call.data == 'randbios':
-			bio = random.choice(bios)
-			bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=bio,reply_markup=kbs)
-		elif call.data == 'photoramdan':
-			image_url1 = random.choice(linksramdan)
-			bot.send_photo(call.message.chat.id, image_url1,reply_markup=kbb)
-		elif call.data == 'backb':
-			bot.send_message(call.message.chat.id,mssg,reply_markup=k)
-		elif call.data == 'anyphoto':
-			image_url = random.choice(linkos)
-			bot.send_photo(call.message.chat.id, image_url,reply_markup=kb)
-		elif call.data == 'anyphotoramadan':
-			image_url1 = random.choice(linksramdan)
-			bot.send_photo(call.message.chat.id, image_url1,reply_markup=kbb)
-		elif call.data == 'changedoa':
-			ggm = random.choice(suu)
-			bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=ggm,reply_markup=kbbb)
-		elif call.data == 'quran':
-			ggm = random.choice(suu)
-			bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=ggm,reply_markup=kbbbb)
-		elif call.data == 'nqsbndy':
-			ggm = random.choice(suu)
-			bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=ggm,reply_markup=kbbbb)	
-		elif call.data == 'changebios':
-			bio = random.choice(bios)
-			bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=bio,reply_markup=kbs)
 	
 @bot.callback_query_handler(func=lambda call: True)
 def tylaoa(call):
@@ -147,9 +104,51 @@ def alll(call):
     keyboard.row(previous,next)
 
     bot.edit_message_media(types.InputMediaPhoto(url), call.message.chat.id, call.message.message_id,reply_markup=keyboard)
+    
+tok = Config.TG_BOT_TOKEN
+bot = telebot.TeleBot(tok)
+
+@bot.message_handler(commands=['start'])
+def sttart(message):
+	bot.reply_to(message,mssg,reply_markup=k)
+
+@bot.callback_query_handler(func=lambda call:True)
+def callback_query(call):
+	if call.message:
+		if call.data == 'randphoto':
+			image_url = random.choice(linkos)
+			bot.send_photo(call.message.chat.id, image_url,reply_markup=kb)
+		elif call.data == 'randdoa':
+			ggm = random.choice(suu)
+			bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=ggm,reply_markup=kbbb)
+		elif call.data == 'randbios':
+			bio = random.choice(bios)
+			bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=bio,reply_markup=kbs)
+		elif call.data == 'photoramdan':
+			image_url1 = random.choice(linksramdan)
+			bot.send_photo(call.message.chat.id, image_url1,reply_markup=kbb)
+		elif call.data == 'backb':
+			bot.send_message(call.message.chat.id,mssg,reply_markup=k)
+		elif call.data == 'anyphoto':
+			image_url = random.choice(linkos)
+			bot.send_photo(call.message.chat.id, image_url,reply_markup=kb)
+		elif call.data == 'anyphotoramadan':
+			image_url1 = random.choice(linksramdan)
+			bot.send_photo(call.message.chat.id, image_url1,reply_markup=kbb)
+		elif call.data == 'changedoa':
+			ggm = random.choice(suu)
+			bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=ggm,reply_markup=kbbb)
+		elif call.data == 'quran':
+			ggm = random.choice(suu)
+			bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=ggm,reply_markup=kbbbb)
+		elif call.data == 'nqsbndy':
+			ggm = random.choice(suu)
+			bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=ggm,reply_markup=kbbbb)	
+		elif call.data == 'changebios':
+			bio = random.choice(bios)
+			bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=bio,reply_markup=kbs)
             
-print("تم تشغيل البوت اذا وقف معك شي تواصل معي @Almortagel_12")
-bot.polling(none_stop=True)
+bot.polling()
 """
 Dev /- @Almortagel_12
 Ch /- @AlmortagelTech
