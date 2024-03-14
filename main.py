@@ -73,7 +73,7 @@ def callback_query(call):
 			ggm = random.choice(suu)
 			bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=ggm,reply_markup=kbbb)
 		elif call.data == 'quran':
-        voices = "https://t.me/ALMORTAGELRSK/" + str(random.randint(7, 276))
+            voices = "https://t.me/ALMORTAGELRSK/" + str(random.randint(7, 276))
         bot.send_voice(call.message.chat.id, voices, caption="""
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
 """)
