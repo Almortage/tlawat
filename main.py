@@ -1,4 +1,5 @@
 import requests, threading, time, random, json, os
+from config import Config
 from telebot import TeleBot 
 from telebot.types import Message, InlineKeyboardMarkup, InlineKeyboardButton,  CallbackQuery
 
