@@ -1,4 +1,5 @@
 import telebot
+import telebot, requests, random, re
 from telebot import types
 import os
 from config import Config
@@ -93,4 +94,4 @@ def calldata(call):
             bot.send_document(call.message.chat.id, file)
 
 print("تم تشغيل البوت بواسطة المرتجل=")
-bot.polling()
+bot.polling(none_stop=True)
