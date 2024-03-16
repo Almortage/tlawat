@@ -1,91 +1,238 @@
-from config import Config
-import os
-import random
-import requests
-import telebot
-from telebot import types
-linksramdan = 'https://i.ibb.co/ThYVFLf/bda625a868b0.jpg','https://i.ibb.co/fQqYFt3/e896c04e74ff.jpg','https://i.ibb.co/HXPVRkF/dcea9320292d.jpg','https://i.ibb.co/FsCS00H/d18d4ad3684d.jpg','https://i.ibb.co/6rctjZq/4386876d2cc0.jpg','https://i.ibb.co/w0rzHM9/49ac4752deaa.jpg','https://i.ibb.co/6Y405mp/78e301d02eea.jpg'
+import requests, threading, time, random, json, os
+from telebot import TeleBot 
+from telebot.types import Message, InlineKeyboardMarkup, InlineKeyboardButton,  CallbackQuery
 
-bios = '• من عرف الله هانت مصيبته، ومن أنس به زالت غربته ومن رضي بالقضاء سعد 🌼','الاستغفار يفتح الأقفال ويشرح البال ويكثر المال ويصلح الحال. 🙏','• في المآزق ينكشف لؤم الطباع، وفي الفتن تنكشف أصالة الرأي وفي الشدة ينكشف صدق الإخاء 💏','• فتح الله للمطالب أبواباً وسن للحوادث أسباباً فقال لنا : ادعوا، وقال : اعملوا 🙏','• هموم الدنيا مؤقتة، مهما طال زمنها لكنها في قلوبنا الضعيفة أكبر من الآخرة. 😔','• لا تندم على إحسان صادق بذلته فالطيور لا تأخذ مقابلاً على تغريدها.🫀','• اثنان لا تنساهما: ذكر الله والموت، واثنان لا تذكرهما: إحسانك للناس، وإساءتهم إليك.🌜','• الله يكتب لك بكل خطوة سعادة، وكل نظرة عبادة، وكل بسمة شهادة، وكل رزق زيادة. 🌱💛','• ضاعةُ الوقت أشد من الموتِ؛ لأنّ إضاعةُ الوقت تقطعك عن الله، والدار الآخرة، والموت يقطعك عن الدنيا وأهلها. 👌','• أطع الإله كما أُمر، واملأ فؤادك بالحذر، وأطع أباك فإنّه ربّاك من عهد الصّغر. ☘'
+# api الإذكار
+url = "https://hmsbots.aba.vg/apieati/ApiAthkar.php"
 
-suu = 'اللّهم أصلح لي ديني الذي هو عصمة أمري، وأصلح لي دنياي التي فيها معاشي، وأصلح لي آخرتي التي فيها معادي، واجعل الحياة زيادة لي في كل خير، واجعل الموت راحةً لي من كل شر','يا مُقلّب القلوب ثبّت قلبي على دينك','اللّهم رب السّماوات ورب الأرض ورب العرش العظيم، ربنا ورب كل شيء، فالق الحب والنوى، ومنزل التوراة والإنجيل والفرقان، أعوذ بك من شر كل شيء أنت آخذ بناصيته، اللّهم أنت الأول فليس قبلك شيء، وأنت الآخر فليس بعدك شيء، وأنت الظاهر فليس فوقك شيء، وأنت الباطن فليس دونك شيء، اقضِ عنا الدين، وأغننا من الفقر.','اللّهم مالك الملك، تؤتي الملك من تشاء، وتنزع الملك ممن تشاء، وتعز من تشاء، وتذل من تشاء، بيدك الخير إنّك على كل شيء قدير، رحمن الدنيا والآخرة ورحيمهما، تعطيهما من تشاء، وتمنع منهما من تشاء، ارحمني رحمةً تغنيني بها عن رحمة من سواك.','اللّهم إني أسألك من الخير كله عاجله وآجله ما علمت منه وما لم أعلم، وأعوذ بك من الشر كله عاجله وآجله ما علمت منه وما لم أعلم، اللّهم إني أسألك من خير ما سألك منه عبدك ونبيك، وأعوذ بك من شر ما عاذ به عبدك ونبيك، اللّهم إني أسألك الجنة وما قرّب إليها من قولٍ أو عمل، وأسألك أن تجعل كل قضاءٍ قضيته لي خيرًا.','اللّهم اقسم لنا من خشيتك ما يحول بيننا وبين معاصيك، ومن طاعتك ما تبلغنا به جنتك، ومن اليقين ما يهون علينا مصيبات الدنيا، ومتعنا بأسماعنا وأبصارنا وقوتنا ما أحييتنا واجعله الوارث منا واجعل ثأرنا على من ظلمنا، وانصرنا على من عادانا، ولا تجعل مصيبتنا في ديننا، ولا تجعل الدنيا أكبر همنا ولا مبلغ علمنا، ولا تسلّط علينا من لا يرحمنا.','اللّهم عالم الغيب والشهادة، فاطر السماوات والأرض، رب كل شيء ومليكه، أشهد أنّ لا إله إلا أنت، أعوذ بك من شر نفسي وشر الشيطان وشركه.','اللّهم إنّي أعوذ بك من فتنة النار وعذاب النّار، وفتنة القبر وعذاب القبر، ومن شر فتنة الغنى ومن شر فتنة الفقر، وأعوذ بك من شر فتنة المسيح الدجال، اللّهم اغسل خطاياي بماء الثلج والبرد، ونقِّ قلبي من الخطايا كما نقيت الثوب الأبيض من الدنس، وباعد بيني وبين خطاياي كما باعدت بين المشرق والمغرب، اللّهم فإني أعوذ بك من الكسل والهرم والمأثم والمعزم.','اللّهم رحمتك أرجو فلا تكلني إلى نفسي طَرْفة عين وأصلح لي شأني كله لا إله إلا أنت','اللّهم إني عبدُك وابن عبدِك وابن أمتِك، ناصيتي بيدك، ماضٍ فيّ حكمُك، عدلٌ فيّ قضاؤك، أسألك بكل اسمٍ هو لك سمّيت به نفسك أو أنزلته في كتابك أو علّمت به أحد من خلقك أو استأثرت به في علم الغيب عندك أن تجعل القرآن ربيع قلبي ونور صدري وجلاء حزني وذهاب همّي.','يا حي يا قيوم برحمتك أستغيث أصلح لي شأني كله ولا تكلني إلى نفسي طَرْفة عيْن.','اللّهم إنّي أعوذ بك من الهمِّ والحَزَن والعجز والكسل والبخل والجبن وضلع الدَّيْن وغلبة الرجال'
 
-k = types.InlineKeyboardMarkup()
-k1 = types.InlineKeyboardButton(text='☘️ صور رمضانيه', callback_data='randphoto')
-k2 = types.InlineKeyboardButton(text='🌙 ادعيه عشوائيه', callback_data='randdoa')
-k3 = types.InlineKeyboardButton(text='🏵 أقتباسات دينيه', callback_data='randbios')
-k4 = types.InlineKeyboardButton('🩵 صور ادعيه رمضانيه', callback_data='photoramdan')
-k5 = types.InlineKeyboardButton('تلاوات', callback_data='quran')
-k6 = types.InlineKeyboardButton('الشيخ نقشبندي', callback_data='nqsbndy')
-kb = types.InlineKeyboardMarkup()
-kb1 = types.InlineKeyboardButton(text='الرجوع', callback_data='backb')
-kb2 = types.InlineKeyboardButton(text='تغيير الصوره', callback_data='anyphoto')
-kb3 =types.InlineKeyboardButton(text='تغيير الصوره', callback_data='anyphotoramadan')
-kb4 = types.InlineKeyboardButton(text='تغيير الدعاء', callback_data='changedoa')
-kb.add(kb1,kb2)
-kbb = types.InlineKeyboardMarkup()
-kbbb = types.InlineKeyboardMarkup()
-kbbb.add(kb1,kb4)
-kbb.add(kb1,kb3)
-kbbs.add(kb5,kb6)
-k.add(k1,k2)
-k.add(k3)
-k.add(k4)
-k.add(k5,k6)
-kbs = types.InlineKeyboardMarkup()
-kbs1 = types.InlineKeyboardButton(text='تغيير الاقتباس', callback_data='changebios')
-kbs.add(kb1,kbs1)
-mssg = """اهــلا بـك فـي بوت رمضان 😌💚🏮
+bot_token = Config.TG_BOT_TOKEN
+developer = 5089553588
 
-اختر احد الخيارات الموجوده في الاسفل ❤️☘ """
-linkos = 'https://i.ibb.co/sJNNGFJ/4fa3bb6f84b2.jpg','https://i.ibb.co/8NTK9bV/d30a1d7d6f69.jpg','https://i.ibb.co/FzhHbq7/1dc2c31e902d.jpg','https://i.ibb.co/Jptmqz0/b3e20e7b40a2.jpg','https://i.ibb.co/bXTjCM2/fe383713cf77.jpg','https://i.ibb.co/hY9Kmtf/9b99fa20f016.jpg','https://i.ibb.co/txpf8vr/848f133f3615.jpg','https://i.ibb.co/G2DQhcs/eead1d82ac66.jpg','https://i.ibb.co/LYZ6x7r/cbb062b0cd57.jpg','https://i.ibb.co/ctr1tqp/0582498ec00a.jpg','https://i.ibb.co/zPBbN4T/f9b418d46b52.jpg','https://i.ibb.co/R9mVCF7/34214a9aba03.jpg'
+
+app = TeleBot(bot_token)
+
+# ضيف صلوات اكتر.
+salat_nabi = [
+    "اَللَّهُمَّ صَلَّي وَسَلَّمَ وَبَارَكَ عَلَى سَيِّدِنَا مُحَمَّدْ وَعَلَى آلِهِ وَصَحْبِهِ وَسَلَّمَ تَسْلِيمًا كَثِيرًا",
+    "صَلَوَات اَللَّهِ عَلَيْكَ يَاحَبِيبِي يَارْسُولْ اَللَّهِ",
+    "صَلَّي عَلَى سَيِّدِنَا مُحَمَّدْ خَيْرْ اَلْأَنَامِ",
+    "قَالَ رسُولُ اللَّهِ ﷺ: الْبخِيلُ مَنْ ذُكِرْتُ عِنْدَهُ، فَلَم يُصَلِّ علَيَّ\n\nصَلَّى اَللَّهُ عَلَيْهِ وَسَلَّمَ"
+]
+
+@app.message_handler(commands=["start"], chat_types=["private"])
+def start(message: Message):
+    bot_info = app.get_me()
+    dev_info = app.get_chat(developer)
+    bot_user = bot_info.username
+    user_id = message.from_user.id
+    if user_id not in list(users.keys()):
+        users[str(user_id)] = {
+            "prophet" : False,
+            "azkar" : False
+        }
+        write(db_path, users)
+    caption = f"""🙋🏻‍♂️︙مرحباً عزيزي {message.from_user.first_name}
+   
+🤖 ⌯ هذا البوت مخصص لنشر أدعية وأذكار وأيضا الصلاةعلى النبي كل ساعة للقنوات والمجموعات.
+🎛️ ⌯ إضغط على تعليمات لتلقي الأوامر.
+
+⬇️ ⌯ قم بالتحكم بالبوت الان بواسطة الازرار بالأسفل.
+"""
+    markup = [
+        [
+            InlineKeyboardButton("تعليمات", callback_data="help")
+        ],
+        [
+            InlineKeyboardButton("اضافة البوت لقناه 🤖", f"http://t.me/{bot_user}?startchannel=new"),
+            InlineKeyboardButton("إضافة البوت لمجموعه 🤖", f"http://t.me/{bot_user}?startgroup=true")            
+        ],
+        [
+            InlineKeyboardButton(dev_info.first_name, f"https://t.me/{dev_info.username}")
+        ]
+    ]
+    app.reply_to(
+        message,
+       text=caption,
+       reply_markup=InlineKeyboardMarkup(markup)
+   )
+
+@app.message_handler(commands=["private_azkar"], chat_types=["private"])
+@app.message_handler(func=lambda message: message.text == "تفعيل الاذكار", chat_types=["group",  "channel"])
+def enable_azkar(message: Message):
+    chat_id = message.chat.id
+    if chat_id not in list(users.keys()):
+        users[str(chat_id)] = {
+            "prophet" : False,
+            "azkar" : True
+        }
+        write(db_path, users)
+        app.reply_to(message, "تم تفعيل الأذكار و الأدعيه 💙!️")
+        return
+    elif chat_id in list(users.keys()) and not users[chat_id]["azkar"]:
+        users[str(chat_id)]["azkar"] = True
+        app.reply_to(message, "تم تفعيل الأذكار و الأدعيه 💙!️")
+    app.reply_to(message, "الأذكار والأدعيه مفعله 💙!")
+
+@app.message_handler(commands=["cancel_azkar"], chat_types=["private"])
+@app.message_handler(func=lambda message: message.text == "تعطيل الاذكار", chat_types=["group",  "channel"])
+def disable_azkar(message: Message):
+    chat_id = message.chat.id
+    if chat_id in list(users.keys()) and users[chat_id]["azkar"]:
+        users[str(chat_id)]["azkar"] = False
+        write(db_path, users)
+        app.reply_to(message, "تم تعطيل الأذكار و الأدعيه 🥲!\n\nترفض الحسنات؟ 🥲!️")
+        return
+    app.reply_to(message, "الأذكار والأدعيه غير مفعله 🥲")
+ 
+@app.message_handler(commands=["private_prophet"], chat_types=["private"])
+@app.message_handler(func=lambda message: message.text == "تفعيل الصلاه على النبي", chat_types=["group",  "channel"])
+def enable_nabi(message: Message):
+    chat_id = message.chat.id
+    if chat_id not in list(users.keys()):
+        users[str(chat_id)] = {
+            "prophet" : True,
+            "azkar" : False
+        }
+        write(db_path, users)
+        app.reply_to(message, "تم تفعيل الصلاه على النبي 💙!\n\nعليه أفضل الصلاه و أتم التسليم ❤️❤️")
+        return
+    elif chat_id in list(users.keys()) and not users[chat_id]["prophet"]:
+        users[str(chat_id)]["prophet"] = True
+        write(db_path, users)
+        app.reply_to(message, "تم تفعيل الصلاه على النبي 💙!\n\nعليه أفضل الصلاه و أتم التسليم ❤️❤️")
+        return
+    app.reply_to(message, "الصلاه على النبي مفعله 💙")
+
+@app.message_handler(commands=["cancel_prophet"], chat_types=["private"])
+@app.message_handler(func=lambda message: message.text == "تعطيل الصلاه على النبي", chat_types=["group",  "channel"])
+def disable_nabi(message: Message):
+    chat_id = message.chat.id
+    if chat_id in list(users.keys()) and users[chat_id]["prophet"]:
+        users[str(chat_id)]["prophet"] = False
+        write(db_path, users)
+        app.reply_to(message, "تم تعطيل الصلاه على النبي 🥲\n\nترفض الحسنات؟ 🥲")
+        return
+    app.reply_to(message, "الصلاه على النبي غير مفعله 🥲")
+
+
+@app.callback_query_handler(func=lambda callback: callback.data == "help")
+def help(callback: CallbackQuery):
+    caption = """🎛️︙التعليمات :
+
+⬆️ ⌯ كيفية جعل البوت يرسل الأذكار !؟.
+
+✳️︙أضف البوت الى قناتك أو مجموعتك وقم برفعه مشرف.
+
+✳️︙للتفعيل في المجموعات/القنوات أرسل في المجموعة/القناه كلمة تفعيل
+
+✳️︙يمكنك جعل البوت أيضاً يرسل الأذكار لك على الخاص بالضغط على /private_azkar لتفعيل الأذكار والادعيه و /private_prophet لتفعيل الصلاه على النبي 
+
+
+⬇️ ⌯ كيفية إيقاف البوت من إرسال الأذكار !؟.
+
+⛔︙لإيقاف البوت من إرسال الأذكار/الصلاه على النبي لك على الخاص إضغط على : /cancel_azkar | /cancel_prophet
+"""
+    markup = [
+        [
+            InlineKeyboardButton("العوده 🔙", callback_data="main")
+        ]
+    ]
     
-tok = Config.TG_BOT_TOKEN
-bot = telebot.TeleBot(tok)
+    app.edit_message_text(
+        message_id=callback.message.id,
+        chat_id=callback.from_user.id, 
+        text=caption,
+        reply_markup=InlineKeyboardMarkup(markup) 
+    )
 
-@bot.message_handler(commands=['start'])
-def sttart(message):
-	bot.reply_to(message,mssg,reply_markup=k)
+@app.callback_query_handler(func=lambda callback: callback.data == "main")
+def restart(callback: CallbackQuery):
+    bot_info = app.get_me()
+    dev_info = app.get_chat(developer)
+    bot_user = bot_info.username
+    user_id = callback.from_user.id
+    caption = f"""🙋🏻‍♂️︙مرحباً عزيزي {callback.from_user.first_name}
+   
+🤖 ⌯ هذا البوت مخصص لنشر أدعية وأذكار وأيضا الصلاةعلى النبي كل ساعة للقنوات والمجموعات.
+🎛️ ⌯ إضغط على تعليمات لتلقي الأوامر.
 
-@bot.callback_query_handler(func=lambda call:True)
-def callback_query(call):
-	if call.message:
-		if call.data == 'randphoto':
-			image_url = random.choice(linkos)
-			bot.send_photo(call.message.chat.id, image_url,reply_markup=kb)
-		elif call.data == 'randdoa':
-			ggm = random.choice(suu)
-			bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=ggm,reply_markup=kbbb)
-		elif call.data == 'randbios':
-			bio = random.choice(bios)
-			bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=bio,reply_markup=kbs)
-		elif call.data == 'photoramdan':
-			image_url1 = random.choice(linksramdan)
-			bot.send_photo(call.message.chat.id, image_url1,reply_markup=kbb)
-		elif call.data == 'backb':
-			bot.send_message(call.message.chat.id,mssg,reply_markup=k)
-		elif call.data == 'anyphoto':
-			image_url = random.choice(linkos)
-			bot.send_photo(call.message.chat.id, image_url,reply_markup=kb)
-		elif call.data == 'anyphotoramadan':
-			image_url1 = random.choice(linksramdan)
-			bot.send_photo(call.message.chat.id, image_url1,reply_markup=kbb)
-		elif call.data == 'changedoa':
-			ggm = random.choice(suu)
-			bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=ggm,reply_markup=kbbb)
-		elif call.data == 'quran':
-            voices = "https://t.me/ALMORTAGELRSK/" + str(random.randint(7, 276))
-        bot.send_voice(call.message.chat.id, voices, reply_markup=kbbs)
-		elif call.data == 'nqsbndy':
-			voicesss = "https://t.me/ggcnjj/" + str(random.randint(2, 114))
-        bot.send_voice(call.message.chat.id, voicesss, reply_markup=kbbs)	
-		elif call.data == 'changebios':
-			bio = random.choice(bios)
-			bot.edit_message_text(chat_id=call.message.chat.id,message_id=call.message.message_id,text=bio,reply_markup=kbs)
-            
-bot.polling()
+⬇️ ⌯ قم بالتحكم بالبوت الان بواسطة الازرار بالأسفل.
 """
-Dev /- @Almortagel_12
-Ch /- @AlmortagelTech
-In /- 2024/2/14
-"""
+    markup = [
+        [
+            InlineKeyboardButton("تعليمات", callback_data="help")
+        ],
+        [
+            InlineKeyboardButton("اضافة البوت لقناه 🤖", f"http://t.me/{bot_user}?startchannel=new"),
+            InlineKeyboardButton("إضافة البوت لمجموعه 🤖", callback_data=f" http://t.me/{bot_user}?startgroup")
+        ],
+        [
+            InlineKeyboardButton(dev_info.first_name, f"https://t.me/{dev_info.username}")
+        ]
+    ]
+    app.edit_message_text(
+        message_id=callback.message.id, 
+        chat_id=callback.message.chat.id, 
+        text=caption,
+        reply_markup=InlineKeyboardMarkup(markup)
+    )
+    
+    
+def main():
+    azkar_thread = threading.Thread(target=azkar)
+    prophet_thread = threading.Thread(target=prophet)
+    azkar_thread.start()
+    prophet_thread.start()
+    
+    
+def azkar():
+    while True:
+        if len(list(users.keys())) == 0:
+            continue
+        response = requests.get(url).text
+        for user in users.keys():
+            if users[user].get("azkar"):
+                try:
+                    app.send_message(
+                        user,
+                        response
+                    )
+                except:
+                    continue
+            continue
+        time.sleep(60)
+
+def prophet():
+    while True:
+        if len(list(users.keys())) == 0:
+            continue
+        choice = random.choice(salat_nabi)
+        for user in users.keys():
+            if users[user].get("prophet"):
+                try:
+                    app.send_message(
+                        user,
+                        choice
+                    )
+                except:
+                    continue
+            continue
+        time.sleep(60)
+
+def write(file_path, data):
+    with open(file_path, "w") as jsonfile:
+        json.dump(data, jsonfile, indent=2)
+        
+def read(file_path):
+    with open(file_path, "r") as jsonfile:
+        return json.load(jsonfile)
+
+if __name__ == "__main__":
+    db_path = "users.json"
+    if not os.path.exists(db_path):
+        write(db_path, {})
+    users = read(db_path)
+    thread = threading.Thread(target=main)
+    thread.start()
+    app.infinity_polling()
