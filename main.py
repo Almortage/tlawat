@@ -15,12 +15,12 @@ def start(message):
     bstart = types.InlineKeyboardButton("المصحف", callback_data="starttt")
     butin = types.InlineKeyboardButton("احاديث دينية", callback_data="religiou")
     bkotob = types.InlineKeyboardButton("كتب دينية", callback_data="kotob")
-    bkotobb = types.InlineKeyboardButton("اوقات الصلاة ⏱️", url="https://dev-almortageltech.pantheonsite.io/time")
+    bstarjt = types.InlineKeyboardButton(" اوقات الصلاة", callback_data="starjt")
     buttooon = types.InlineKeyboardButton("المطور", url= "https://t.me/Almortagel_12")
     private.add(button,buttoon)
     private.add(buttin,buttn)
     private.add(bstart,butin)
-    private.add(bkotob,bkotobb)
+    private.add(bkotob,bstarjt)
     private.add(buttooon)    
     bot.send_photo(message.chat.id,"https://t.me/ifuwufuj/29",caption="""
 ✓ 👋 مرحبا بك عزيزي في انا بوت  اسلامي اقدم تلاوات باصوات وابدعات شيوخ متعددين 
@@ -98,6 +98,43 @@ def alll(call):
     keyboard.row(previous,next)
 
     bot.edit_message_media(types.InputMediaPhoto(url), call.message.chat.id, call.message.message_id,reply_markup=keyboard)
+@bot.callback_query_handler(func=lambda call: True)
+def tylaoa(call):
+    if call.data == "starjt":
+        voict = ["اهلا بك عزيزي في قسم مواقيت الصلاة انتظر ارسل اسم مدينتك او دولتك لاقوم بجلب اوقات الصلاة بأسم مدينك او بأسم دولتك",]
+        bot.send_message(call.message.chat.id,voict)
+@bot.message_handler(content_types=['text'])
+def timings(message):
+	brok = bot.reply_to(message,'حسناا انتظر ')
+	try:
+		msg = message.text
+		response = requests.get(f'https://timesprayer.com/prayer-times-in-{msg}.html').text
+		ggg = re.search("<title>(.*?)</title>",response).group(1)
+		fajr = re.search("<td><strong>صلاة الفجْر</strong></td><td>(.*?)</td></tr>", response).group(1);alshuruq = re.search("<td><strong> الشروق</strong></td><td>(.*?)</td></tr>", response).group(1);alzuhr = re.search("<td><strong>صلاة الظُّهْر</strong></td><td>(.*?)</td></tr>", response).group(1);aleasr = re.search("<td><strong>صلاة العَصر</strong></td><td>(.*?)</td></tr>", response).group(1);almaghrib = re.search("<td><strong>صلاة المَغرب</strong></td><td>(.*?)</td></tr>", response).group(1);aleisha = re.search("<td><strong>صلاة العِشاء</strong></td><td>(.*?)</td></tr>", response).group(1)
+		
+		almakan = re.search("<div><b>المكان :</b> (.*?)</div>",response).group(1)
+		
+		alsala = re.search("<div><b>الصلاة القادمة :</b> (.*?)</div>",response).group(1)
+		
+		saea = re.search("<div><b>ساعات الصيام :</b> (.*?)</div>",response).group(1)
+		
+		miladi = re.search("<div><b>التاريخ :</b> (.*?)</div>",response).group(1)
+		
+		hijri = re.search("<div><b>هجري :</b> (.*?)</div>",response).group(1)
+		
+		day = re.search("<b>اليوم :</b> (.*?)</div>",response).group(1)
+		
+		tim = re.search('<b id="timenowinthecity">(.*?)</b>',response).group(1)
+		
+		alzamania = re.search('(?<=title=")(\w+/\w+)', response).group(1)
+		
+		name = ggg.split("في")[1].strip()
+		text = f"{ggg}\n\nصلاة الفجر: {fajr}\nالشروق: {alshuruq}\nصلاة الظهر: {alzuhr}\nصلاة العصر: {aleasr}\nصلاة المغرب: {almaghrib}\nصلاة العشاء: {aleisha}\n — — — — — —\nالمكان: {almakan}\nالصلاة القادمة: {alsala}\nساعات الصيام: {saea}\nالتاريخ: {miladi}\nهجري: {hijri}\nالوقت الان: {tim} حسب التوقيت المحلي في {name}\nاليوم: {day}\nالمنطقة الزمنية: {alzamania}"
+		bot.delete_message(message.chat.id,message_id=brok.message_id)
+		bot.reply_to(message,text)
+		
+	except:
+		bot.edit_message_text(chat_id=message.chat.id, message_id=brok.message_id, text='لم اتعرف على اسم المدينة')
 print("@Almortagel_12")
 print("\033[1;33m• Running..... /start ")
 bot.polling(none_stop=True)
