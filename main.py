@@ -3,6 +3,7 @@ from config import Config
 from telebot import types 
 import os
 
+id = 5089553588
 token = Config.TG_BOT_TOKEN#توكنك
 bot = telebot.TeleBot(token)   
 @bot.message_handler(commands=["start"])
@@ -106,7 +107,7 @@ def alll(call):
 
     bot.edit_message_media(types.InputMediaPhoto(url), call.message.chat.id, call.message.message_id,reply_markup=keyboard)
     
-id = 5089553588
+
 t = ['creator', 'member', 'administrator']
 @bot.message_handler(commands=["stats"])
 def stats(message):
