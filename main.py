@@ -43,8 +43,8 @@ def tylaoa(call):
         voics = ["اللهم صلي علي سيدنا ونبينا محمد",]
         bot.send_message(call.message.chat.id, voics)
     elif call.data == "starttt":
-        voic = ["رحبا بك في قسم المصحف الرجاء ارسال رقم الصفحة لتصفح صفحات القرآن الكريم للرجوع ارسل /start"]
-       bot.send_message(call.message.chat.id,voic)
+        voic = ["رحبا بك في قسم المصحف الرجاء ارسال رقم الصفحة لتصفح صفحات القرآن الكريم للرجوع ارسل /start",]
+        bot.send_message(call.message.chat.id,voic)
 
 @bot.message_handler(func=lambda message: True)
 def all(message):
