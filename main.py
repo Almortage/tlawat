@@ -12,9 +12,11 @@ def start(message):
     buttoon = types.InlineKeyboardButton("✓ صورة دينية ", callback_data="religious")
     buttn = types.InlineKeyboardButton("خطب دينيه", callback_data="quraan")
     buttin = types.InlineKeyboardButton("الصلي علي النبي", callback_data="qurn")
+    bstart = types.InlineKeyboardButton("المصحف", callback_data="starttt")
     buttooon = types.InlineKeyboardButton("المطور", url= "https://t.me/Almortagel_12")
     private.add(button,buttoon)
     private.add(buttin,buttn)
+    private.add(bstart)
     private.add(buttooon)    
     bot.send_photo(message.chat.id,"https://t.me/ifuwufuj/29",caption="""
 ✓ 👋 مرحبا بك عزيزي في انا بوت  اسلامي اقدم تلاوات باصوات وابدعات شيوخ متعددين 
@@ -40,6 +42,50 @@ def tylaoa(call):
     elif call.data == "qurn":
         voics = ["اللهم صلي علي سيدنا ونبينا محمد",]
         bot.send_message(call.message.chat.id, voics)
+    elif call.data == "starttt":
+        voic = ["رحبا بك في قسم المصحف الرجاء ارسال رقم الصفحة لتصفح صفحات القرآن الكريم للرجوع ارسل /start"]
+       bot.send_message(message.chat.id,voic)
+
+@bot.message_handler(func=lambda message: True)
+def all(message):
+    try:
+            num = int(message.text)
+            url = "https://quran.ksu.edu.sa/png_big/" + str(num) + ".png"
+
+            keyboard = types.InlineKeyboardMarkup()
+            cou = types.InlineKeyboardButton(text=f"• {num} •", callback_data="couu")
+            previous = types.InlineKeyboardButton(text="صفحة السابقة", callback_data=str(num - 1))
+            next = types.InlineKeyboardButton(text="صفحة التالية", callback_data=str(num + 1))
+
+            keyboard.row(cou)
+            keyboard.row(previous,next)
+
+            bot.send_photo(message.chat.id,url, reply_markup=keyboard)
+    except:
+            pass
+            bot.reply_to(message,'error')
+
+@bot.callback_query_handler(func=lambda call: True)
+def alll(call):
+    if call.data == 'couu':
+     bot.answer_callback_query(call.id, text='هذا زر يعرض فيه العدد فقط')
+     exit()
+    num = int(call.data)
+    url = "https://quran.ksu.edu.sa/png_big/" + str(num) + ".png"
+
+    keyboard = types.InlineKeyboardMarkup()
+
+    cou = types.InlineKeyboardButton(text=f"• {num} •", callback_data="couu")
+    previous = types.InlineKeyboardButton(text="صفحة السابقة", callback_data=str(num - 1))
+    next = types.InlineKeyboardButton(text="صفحة التالية", callback_data=str(num + 1))
+
+
+    keyboard.row(cou)
+    keyboard.row(previous,next)
+
+    bot.edit_message_media(types.InputMediaPhoto(url), call.message.chat.id, call.message.message_id,reply_markup=keyboard)
+
 print("@Almortagel_12")
 print("\033[1;33m• Running..... /start ")
 bot.polling(none_stop=True)
+"""
