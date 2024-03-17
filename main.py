@@ -39,7 +39,9 @@ def tylaoa(call):
 """)
     elif call.data == "qurn":
         voicess = "https://t.me/dmatrix12/" + str(random.randint(4, 300))
-        bot.send_message(call.message.chat.id, voicess)
+        bot.send_message(call.message.chat.id, voicess, caption="""
+✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
+"""))
 print("\033[4;35m-"*10)
 print("\033[1;33m• Running..... /start ")
 print("\033[4;35m-"*10)
