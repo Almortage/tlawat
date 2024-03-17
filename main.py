@@ -95,7 +95,10 @@ def main(message):
 ↞مـتبقي لـ صلاة المقبله : {q} .
 ↞ اوقـات الصـلاة اليِـوم : 
 ↞مـن اليـوم : {i} .*''',parse_mode="Markdown",reply_to_message_id=message.message_id)
-    elif call.data == "starttt":
+
+@bot.callback_query_handler(func=lambda call: True)
+def tylaoa(call):
+    if call.data == "starttt":
         voic = ["مرحبا بك في قسم المصحف الرجاء ارسال رقم الصفحة لتصفح صفحات القرآن الكريم للرجوع ارسل /start",]
         bot.send_message(call.message.chat.id,voic)
 
