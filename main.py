@@ -10,8 +10,11 @@ def start(message):
     private = types.InlineKeyboardMarkup()
     button = types.InlineKeyboardButton("✓ تلاوة ", callback_data="quran")
     buttoon = types.InlineKeyboardButton("✓ صورة دينية ", callback_data="religious")
-    buttooon = types.InlineKeyboardButton("المطور", url= "https://t.me/Almortagel_12")
+    buttn = types.InlineKeyboardButton("خطب دينيه", callback_data="quraan")
+    butten = types.InlineKeyboardButton("احاديث دينية ", callback_data="hades")
+    buttn = types.InlineKeyboardButton("المطور", url= "https://t.me/Almortagel_12")
     private.add(button,buttoon)
+    private.add(buttn,butten)
     private.add(buttooon)    
     bot.send_photo(message.chat.id,"https://t.me/ifuwufuj/29",caption="""
 ✓ 👋 مرحبا بك عزيزي في بوت تلاوات باصوات وابدعات شيوخ متعددين 
@@ -27,6 +30,16 @@ def tylaoa(call):
     elif call.data == "religious":
         voicees = "https://t.me/livequrann/" + str(random.randint(22, 221))
         bot.send_photo(call.message.chat.id, voicees, caption="""
+✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
+""")
+    elif call.data == "quraan":
+        voicess = "https://t.me/fresdewi/" + str(random.randint(2, 201))
+        bot.send_voice(call.message.chat.id, voicess, caption="""
+✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
+""")
+    elif call.data == "hades":
+        voics = "https://t.me/TheIslamicProphet/" + str(random.randint(13, 4813))
+        bot.send_message(call.message.chat.id, voics, caption="""
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
 """)
 print("\033[4;35m-"*10)
