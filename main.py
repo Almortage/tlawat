@@ -41,8 +41,8 @@ def tylaoa(call):
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
 """)
     elif call.data == "religiou":
-        voicees = "https://t.me/dmatrix12/" + str(random.randint(297, 496))
-        bot.send_photo(call.message.chat.id, voicees, caption="""
+        voice = "https://t.me/dmatrix12/" + str(random.randint(297, 496))
+        bot.send_photo(call.message.chat.id, voice, caption="""
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
 """)
     elif call.data == "qurn":
