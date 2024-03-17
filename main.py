@@ -15,7 +15,7 @@ def start(message):
     bstart = types.InlineKeyboardButton("المصحف", callback_data="starttt")
     butin = types.InlineKeyboardButton("احاديث دينية", callback_data="religiou")
     bkotob = types.InlineKeyboardButton("كتب دينية", callback_data="kotob")
-    bkotobb = types.InlineKeyboardButton("اوقات الصلاة ⏱️",'web_app'=>'url'=>"https://dev-almortageltech.pantheonsite.io/time)
+    bkotobb = types.InlineKeyboardButton("اوقات الصلاة ⏱️",'web_app'=>'url'=>"https://dev-almortageltech.pantheonsite.io/time")
     buttooon = types.InlineKeyboardButton("المطور", url= "https://t.me/Almortagel_12")
     private.add(button,buttoon)
     private.add(buttin,buttn)
