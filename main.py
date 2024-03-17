@@ -14,8 +14,8 @@ def start(message):
     buttin = types.InlineKeyboardButton("احاديث", callback_data="qurn")
     buttooon = types.InlineKeyboardButton("المطور", url= "https://t.me/Almortagel_12")
     private.add(button,buttoon)
-    private.add(buttn)
-    private.add(buttin,buttooon)    
+    private.add(buttin,buttn)
+    private.add(buttooon)    
     bot.send_photo(message.chat.id,"https://t.me/ifuwufuj/29",caption="""
 ✓ 👋 مرحبا بك عزيزي في انا بوت  اسلامي اقدم تلاوات باصوات وابدعات شيوخ متعددين 
 ✓ 🔍 انقر على الزر ادناة لارسال ماتريد
@@ -38,7 +38,7 @@ def tylaoa(call):
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
 """)
     elif call.data == "qurn":
-        voicess = "https://t.me/TheIslamicProphet/" + str(random.randint(13, 750))
+        voicess = "https://t.me/dmatrix12/" + str(random.randint(4, 300))
         bot.send_message(call.message.chat.id, voicess)
 print("\033[4;35m-"*10)
 print("\033[1;33m• Running..... /start ")
