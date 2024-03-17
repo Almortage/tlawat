@@ -43,4 +43,3 @@ def tylaoa(call):
 print("@Almortagel_12")
 print("\033[1;33m• Running..... /start ")
 bot.polling(none_stop=True)
-"""
