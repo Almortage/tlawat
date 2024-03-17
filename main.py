@@ -13,7 +13,7 @@ def start(message):
     buttn = types.InlineKeyboardButton("خطب دينيه", callback_data="quraan")
     buttin = types.InlineKeyboardButton("الصلي علي النبي", callback_data="qurn")
     bstart = types.InlineKeyboardButton("المصحف", callback_data="starttt")
-    butin = types.InlineKeyboardButton("تفسير القران", callback_data="religiou")
+    butin = types.InlineKeyboardButton("احاديث دينية", callback_data="religiou")
     buttooon = types.InlineKeyboardButton("المطور", url= "https://t.me/Almortagel_12")
     private.add(button,buttoon)
     private.add(buttin,buttn)
@@ -41,7 +41,7 @@ def tylaoa(call):
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
 """)
     elif call.data == "religiou":
-        voice = "https://t.me/dmatrix12/" + str(random.randint(297, 496))
+        voice = "https://t.me/dmatrix12/" + str(random.randint(799, 1341))
         bot.send_photo(call.message.chat.id, voice, caption="""
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
 """)
