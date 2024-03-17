@@ -25,6 +25,14 @@ def start(message):
 ✓ 👋 مرحبا بك عزيزي في انا بوت  اسلامي اقدم تلاوات باصوات وابدعات شيوخ متعددين 
 ✓ 🔍 انقر على الزر ادناة لارسال ماتريد
 """, reply_markup=private)
+    if idu == id:
+        but = types.InlineKeyboardMarkup(row_width=1)
+        a2 = types.InlineKeyboardButton("اذاعة", callback_data="all")
+        a3 = types.InlineKeyboardButton("ارسل التخزين", callback_data="send_file")
+        but.add(a2)
+        but.add(a3)
+        bot.reply_to(message, "مرحبا عزيزي المطور \n هذه هي لوحة التحكم الخاصة بك\n اذا تريد تعرف احصائيات البوت ارسل /stats", reply_markup=but)        
+        
 @bot.callback_query_handler(func=lambda call: True)
 def tylaoa(call):
     if call.data == "quran":
@@ -97,6 +105,47 @@ def alll(call):
     keyboard.row(previous,next)
 
     bot.edit_message_media(types.InputMediaPhoto(url), call.message.chat.id, call.message.message_id,reply_markup=keyboard)
+    
+id = 5089553588
+t = ['creator', 'member', 'administrator']
+@bot.message_handler(commands=["stats"])
+def stats(message):
+    if message.from_user.id == id:  # تأكد أن معرف المرسل هو معرف المطور المخول
+        with open("ids.txt") as file:
+            lines = file.readlines()
+            # تصفية الأسطر الفارغة والتي تحتوي على مسافات بيضاء
+            clean_lines = [line.strip() for line in lines if line.strip()]
+            num_users = len(clean_lines)
+        bot.reply_to(message, f"عدد أعضاء البوت: {num_users}")
+
+
+##############################
+@bot.callback_query_handler(func=lambda call: True)
+def calldata(call):
+    if call.data == "send_file":
+        with open("ids.txt", "r") as file:
+            bot.send_document(call.message.chat.id, file)
+    elif call.data == "all":
+        bot.send_message(call.message.chat.id, "• ارسل الان ماتريد إذاعته • \n نص - صورة - ملف")
+        bot.register_next_step_handler(call.message, send_broadcast_message)
+
+def send_broadcast_message(message):
+    with open("ids.txt", "r") as file:
+        user_ids = file.readlines()
+        for user_id in user_ids:
+            if message.text:
+                bot.send_message(user_id.strip(), text=message.text)
+            elif message.photo:
+                bot.send_photo(user_id.strip(), photo=message.photo[-1].file_id, caption=message.caption)
+            elif message.document:
+                bot.send_document(user_id.strip(), data=message.document.file_id, caption=message.caption, parse_mode='Markdown')
+# @world_father
+# @world_father
+@bot.callback_query_handler(func=lambda call: True)
+def calldata(call):
+    if call.data == "send_file":
+        with open("ids.txt", "r") as file:
+            bot.send_document(call.message.chat.id, file)
 
 print("@Almortagel_12")
 print("\033[1;33m• Running..... /start ")
