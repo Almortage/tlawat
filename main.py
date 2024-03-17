@@ -26,6 +26,14 @@ def start(message):
 ✓ 👋 مرحبا بك عزيزي في انا بوت  اسلامي اقدم تلاوات باصوات وابدعات شيوخ متعددين 
 ✓ 🔍 انقر على الزر ادناة لارسال ماتريد
 """, reply_markup=private)
+@bot.message_handler(commands=["start"])
+def start(message):
+    if message.chat.type == 'private':
+        user_id = str(message.from_user.id)        
+        with open("ids.txt", 'a+') as file:
+            file.seek(0)          
+            if user_id not in file.read():
+                file.write(user_id + '\n')
     if idu == id:
         but = types.InlineKeyboardMarkup(row_width=1)
         a2 = types.InlineKeyboardButton("اذاعة", callback_data="all")
