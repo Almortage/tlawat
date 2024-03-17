@@ -10,7 +10,9 @@ def start(message):
     private = types.InlineKeyboardMarkup()
     button = types.InlineKeyboardButton("✓ تلاوة ", callback_data="quran")
     buttoon = types.InlineKeyboardButton("✓ صورة دينية ", callback_data="religious")
-    private.add(button,buttoon)    
+    buttooon = types.InlineKeyboardButton("المطور", url= "https://t.me/Almortagel_12")
+    private.add(button,buttoon)
+    private.add(buttooon)    
     bot.send_photo(message.chat.id,"https://t.me/ifuwufuj/29",caption="""
 ✓ 👋 مرحبا بك عزيزي في بوت تلاوات باصوات وابدعات شيوخ متعددين 
 ✓ 🔍 انقر على الزر ادناة لارسال تلاوة
@@ -22,11 +24,9 @@ def tylaoa(call):
         bot.send_voice(call.message.chat.id, voices, caption="""
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
 """)
-@bot.callback_query_handler(func=lambda call: True)
-def imagez(call):
-    if call.data == "religious":
-        voices = "https://t.me/livequrann/" + str(random.randint(22, 221))
-        bot.send_photo(call.message.chat.id, voices, caption="""
+    elif call.data == "religious":
+        voicees = "https://t.me/livequrann/" + str(random.randint(22, 221))
+        bot.send_photo(call.message.chat.id, voicees, caption="""
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
 """)
 print("\033[4;35m-"*10)
