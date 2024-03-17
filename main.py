@@ -12,7 +12,7 @@ def start(message):
     buttoon = types.InlineKeyboardButton("✓ صورة دينية ", callback_data="religious")
     buttn = types.InlineKeyboardButton("خطب دينيه", callback_data="quraan")
     butten = types.InlineKeyboardButton("احاديث دينية ", callback_data="hades")
-    buttn = types.InlineKeyboardButton("المطور", url= "https://t.me/Almortagel_12")
+    buttooon = types.InlineKeyboardButton("المطور", url= "https://t.me/Almortagel_12")
     private.add(button,buttoon)
     private.add(buttn,butten)
     private.add(buttooon)    
