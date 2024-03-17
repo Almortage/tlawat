@@ -76,7 +76,7 @@ def tylaoa(call):
     elif call.data == "sttart":
         voicr = ["مرحبا بك في قسم مواقيت الصلاة ارسل المنطقة لمعرفه الصلاة للرجوع ارسل /start",]
         bot.send_message(call.message.chat.id,voicr)
-        @bot.message_handler(func=lambda m : True )
+@bot.message_handler(func=lambda m : True )
 def main(message):
   	ivo = message.text
   	url = f'http://api.aladhan.com/v1/timingsByCity?city={ivo}'
