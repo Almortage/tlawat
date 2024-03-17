@@ -11,10 +11,11 @@ def start(message):
     button = types.InlineKeyboardButton("✓ تلاوة ", callback_data="quran")
     buttoon = types.InlineKeyboardButton("✓ صورة دينية ", callback_data="religious")
     buttn = types.InlineKeyboardButton("خطب دينيه", callback_data="quraan")
+    buttin = types.InlineKeyboardButton("احاديث", callback_data="qurn")
     buttooon = types.InlineKeyboardButton("المطور", url= "https://t.me/Almortagel_12")
     private.add(button,buttoon)
     private.add(buttn)
-    private.add(buttooon)    
+    private.add(buttin,buttooon)    
     bot.send_photo(message.chat.id,"https://t.me/ifuwufuj/29",caption="""
 ✓ 👋 مرحبا بك عزيزي في انا بوت  اسلامي اقدم تلاوات باصوات وابدعات شيوخ متعددين 
 ✓ 🔍 انقر على الزر ادناة لارسال ماتريد
@@ -33,6 +34,11 @@ def tylaoa(call):
 """)
     elif call.data == "quraan":
         voicess = "https://t.me/fresdewi/" + str(random.randint(2, 201))
+        bot.send_voice(call.message.chat.id, voicess, caption="""
+✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
+""")
+    elif call.data == "qurn":
+        voicess = "https://t.me/TheIslamicProphet/" + str(random.randint(13, 750))
         bot.send_voice(call.message.chat.id, voicess, caption="""
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
 """)
