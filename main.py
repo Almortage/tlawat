@@ -4,6 +4,7 @@ from telebot import types
 import os
 
 id = 5089553588
+bios = '• من عرف الله هانت مصيبته، ومن أنس به زالت غربته ومن رضي بالقضاء سعد 🌼','الاستغفار يفتح الأقفال ويشرح البال ويكثر المال ويصلح الحال. 🙏','• في المآزق ينكشف لؤم الطباع، وفي الفتن تنكشف أصالة الرأي وفي الشدة ينكشف صدق الإخاء 💏','• فتح الله للمطالب أبواباً وسن للحوادث أسباباً فقال لنا : ادعوا، وقال : اعملوا 🙏','• هموم الدنيا مؤقتة، مهما طال زمنها لكنها في قلوبنا الضعيفة أكبر من الآخرة. 😔','• لا تندم على إحسان صادق بذلته فالطيور لا تأخذ مقابلاً على تغريدها.🫀','• اثنان لا تنساهما: ذكر الله والموت، واثنان لا تذكرهما: إحسانك للناس، وإساءتهم إليك.🌜','• الله يكتب لك بكل خطوة سعادة، وكل نظرة عبادة، وكل بسمة شهادة، وكل رزق زيادة. 🌱💛','• ضاعةُ الوقت أشد من الموتِ؛ لأنّ إضاعةُ الوقت تقطعك عن الله، والدار الآخرة، والموت يقطعك عن الدنيا وأهلها. 👌','• أطع الإله كما أُمر، واملأ فؤادك بالحذر، وأطع أباك فإنّه ربّاك من عهد الصّغر. ☘'
 token = Config.TG_BOT_TOKEN#توكنك
 bot = telebot.TeleBot(token)   
 @bot.message_handler(commands=["start"])
@@ -16,7 +17,7 @@ def start(message):
     bstart = types.InlineKeyboardButton("المصحف", callback_data="starttt")
     butin = types.InlineKeyboardButton("احاديث دينية", callback_data="religiou")
     bkotob = types.InlineKeyboardButton("كتب دينية", callback_data="kotob")
-    botob = types.InlineKeyboardButton("مواقيت الصلاة", callback_data="sttart")
+    botob = types.InlineKeyboardButton("اذكار", callback_data="randbios")
     buttooon = types.InlineKeyboardButton("المطور", url= "https://t.me/Almortagel_12")
     private.add(button,buttoon)
     private.add(buttin,buttn)
@@ -73,35 +74,12 @@ def tylaoa(call):
     elif call.data == "qurn":
         voics = ["اللهم صلي علي سيدنا ونبينا محمد",]
         bot.send_message(call.message.chat.id, voics)
-    elif call.data == "sttart":
-        voicr = ["مرحبا بك في قسم مواقيت الصلاة ارسل المنطقة لمعرفه الصلاة للرجوع ارسل /start",]
-        bot.send_message(call.message.chat.id,voicr)
-@bot.message_handler(func=lambda m : True )
-def main(message):
-  	ivo = message.text
-  	url = f'http://api.aladhan.com/v1/timingsByCity?city={ivo}'
-  	ivos = requests.get(url).json()
-  	p = ivos['Place']
-  	g = ivos['next']
-  	q = ivos['the remaining time']
-  	i = ivos['today']
-  	bot.reply_to(message,f'''↞ انتظرنـي *
- *''',parse_mode="Markdown")
-  	time.sleep(2)
-  	bot.send_message(message.chat.id,f'''*↞ تـم الانتهاء 🧚🏼🔃 ...
-• المـعلومات : 
-↞ اسـم المـنطقة : {p} .
-↞الصـلاة المقـبلة : {g} .
-↞مـتبقي لـ صلاة المقبله : {q} .
-↞ اوقـات الصـلاة اليِـوم : 
-↞مـن اليـوم : {i} .*''',parse_mode="Markdown",reply_to_message_id=message.message_id)
-
-@bot.callback_query_handler(func=lambda call: True)
-def tylaoa(call):
-    if call.data == "starttt":
+    elif call.data == 'randbios':
+			bio = random.choice(bios)
+			bot.send_message(call.message.chat.id,bio)
+    elif call.data == "starttt":
         voic = ["مرحبا بك في قسم المصحف الرجاء ارسال رقم الصفحة لتصفح صفحات القرآن الكريم للرجوع ارسل /start",]
         bot.send_message(call.message.chat.id,voic)
-
 @bot.message_handler(func=lambda message: True)
 def all(message):
     try:
@@ -140,48 +118,6 @@ def alll(call):
     keyboard.row(previous,next)
 
     bot.edit_message_media(types.InputMediaPhoto(url), call.message.chat.id, call.message.message_id,reply_markup=keyboard)
-    
-
-t = ['creator', 'member', 'administrator']
-@bot.message_handler(commands=["stats"])
-def stats(message):
-    if message.from_user.id == id:  # تأكد أن معرف المرسل هو معرف المطور المخول
-        with open("ids.txt") as file:
-            lines = file.readlines()
-            # تصفية الأسطر الفارغة والتي تحتوي على مسافات بيضاء
-            clean_lines = [line.strip() for line in lines if line.strip()]
-            num_users = len(clean_lines)
-        bot.reply_to(message, f"عدد أعضاء البوت: {num_users}")
-
-
-##############################
-@bot.callback_query_handler(func=lambda call: True)
-def calldata(call):
-    if call.data == "send_file":
-        with open("ids.txt", "r") as file:
-            bot.send_document(call.message.chat.id, file)
-    elif call.data == "all":
-        bot.send_message(call.message.chat.id, "• ارسل الان ماتريد إذاعته • \n نص - صورة - ملف")
-        bot.register_next_step_handler(call.message, send_broadcast_message)
-
-def send_broadcast_message(message):
-    with open("ids.txt", "r") as file:
-        user_ids = file.readlines()
-        for user_id in user_ids:
-            if message.text:
-                bot.send_message(user_id.strip(), text=message.text)
-            elif message.photo:
-                bot.send_photo(user_id.strip(), photo=message.photo[-1].file_id, caption=message.caption)
-            elif message.document:
-                bot.send_document(user_id.strip(), data=message.document.file_id, caption=message.caption, parse_mode='Markdown')
-# @world_father
-# @world_father
-@bot.callback_query_handler(func=lambda call: True)
-def calldata(call):
-    if call.data == "send_file":
-        with open("ids.txt", "r") as file:
-            bot.send_document(call.message.chat.id, file)
-
 print("@Almortagel_12")
 print("\033[1;33m• Running..... /start ")
 bot.polling(none_stop=True)
