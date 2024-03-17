@@ -16,11 +16,12 @@ def start(message):
     bstart = types.InlineKeyboardButton("المصحف", callback_data="starttt")
     butin = types.InlineKeyboardButton("احاديث دينية", callback_data="religiou")
     bkotob = types.InlineKeyboardButton("كتب دينية", callback_data="kotob")
+    botob = types.InlineKeyboardButton("مواقيت الصلاة", callback_data="sttart")
     buttooon = types.InlineKeyboardButton("المطور", url= "https://t.me/Almortagel_12")
     private.add(button,buttoon)
     private.add(buttin,buttn)
     private.add(bstart,butin)
-    private.add(bkotob)
+    private.add(bkotob,botob)
     private.add(buttooon)    
     bot.send_photo(message.chat.id,"https://t.me/ifuwufuj/29",caption="""
 ✓ 👋 مرحبا بك عزيزي في انا بوت  اسلامي اقدم تلاوات باصوات وابدعات شيوخ متعددين 
@@ -72,6 +73,28 @@ def tylaoa(call):
     elif call.data == "qurn":
         voics = ["اللهم صلي علي سيدنا ونبينا محمد",]
         bot.send_message(call.message.chat.id, voics)
+    elif call.data == "sttart":
+        voicr = ["مرحبا بك في قسم مواقيت الصلاة ارسل المنطقة لمعرفه الصلاة للرجوع ارسل /start",]
+        bot.send_message(call.message.chat.id,voicr)
+        @bot.message_handler(func=lambda m : True )
+def main(message):
+  	ivo = message.text
+  	url = f'http://api.aladhan.com/v1/timingsByCity?city={ivo}'
+  	ivos = requests.get(url).json()
+  	p = ivos['Place']
+  	g = ivos['next']
+  	q = ivos['the remaining time']
+  	i = ivos['today']
+  	bot.reply_to(message,f'''↞ انتظرنـي *
+ *''',parse_mode="Markdown")
+  	time.sleep(2)
+  	bot.send_message(message.chat.id,f'''*↞ تـم الانتهاء 🧚🏼🔃 ...
+• المـعلومات : 
+↞ اسـم المـنطقة : {p} .
+↞الصـلاة المقـبلة : {g} .
+↞مـتبقي لـ صلاة المقبله : {q} .
+↞ اوقـات الصـلاة اليِـوم : 
+↞مـن اليـوم : {i} .*''',parse_mode="Markdown",reply_to_message_id=message.message_id)
     elif call.data == "starttt":
         voic = ["مرحبا بك في قسم المصحف الرجاء ارسال رقم الصفحة لتصفح صفحات القرآن الكريم للرجوع ارسل /start",]
         bot.send_message(call.message.chat.id,voic)
