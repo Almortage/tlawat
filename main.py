@@ -17,7 +17,7 @@ def start(message):
     butin = types.InlineKeyboardButton("احاديث دينية", callback_data="religiou")
     bkotob = types.InlineKeyboardButton("كتب دينية", callback_data="kotob")
     bkkotob = types.InlineKeyboardButton("فيديوهات دينية", callback_data="kotoob")
-    bkkotb = types.InlineKeyboardButton("اذكار دينية", callback_data="ruraan")
+    bkkotb = types.InlineKeyboardButton("ادعيه دينية", callback_data="ruraan")
     bkotobb = types.InlineKeyboardButton("اوقات الصلاة ⏱️", url="https://dev-almortageltech.pantheonsite.io/time")
     buttooon = types.InlineKeyboardButton("المطور", url= "https://t.me/Almortagel_12")
     private.add(button,buttoon)
@@ -49,8 +49,8 @@ def tylaoa(call):
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
 """)
     elif call.data == "ruraan":
-        voicu = "https://t.me/Source_Turbo/" + str(random.randint(8, 167))
-        bot.send_message(call.message.chat.id, text=voicu)
+        voicu = "https://t.me/Source_Turbo/" + str(random.randint(320, 389))
+        bot.send_voice(call.message.chat.id, voicu)
     elif call.data == "religiou":
         voice = "https://t.me/dmatrix12/" + str(random.randint(1343, 2285))
         bot.send_photo(call.message.chat.id, voice, caption="""
