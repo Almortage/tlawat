@@ -102,6 +102,59 @@ def alll(call):
     keyboard.row(previous,next)
 
     bot.edit_message_media(types.InputMediaPhoto(url), call.message.chat.id, call.message.message_id,reply_markup=keyboard)
+url = "https://hmsbots.aba.vg/apieati/ApiAthkar.php"
+@app.message_handler(commands=["private_azkar"], chat_types=["private"])
+@app.message_handler(func=lambda message: message.text == "تفعيل الاذكار", chat_types=["group",  "channel"])
+def enable_azkar(message: Message):
+    chat_id = message.chat.id
+    if chat_id not in list(users.keys()):
+        users[str(chat_id)] = {
+            "prophet" : False,
+            "azkar" : True
+        }
+        write(db_path, users)
+        app.reply_to(message, "تم تفعيل الأذكار و الأدعيه 💙!️")
+        return
+    elif chat_id in list(users.keys()) and not users[chat_id]["azkar"]:
+        users[str(chat_id)]["azkar"] = True
+        app.reply_to(message, "تم تفعيل الأذكار و الأدعيه 💙!️")
+    app.reply_to(message, "الأذكار والأدعيه مفعله 💙!")
+
+@app.message_handler(commands=["cancel_azkar"], chat_types=["private"])
+@app.message_handler(func=lambda message: message.text == "تعطيل الاذكار", chat_types=["group",  "channel"])
+
+def disable_azkar(message: Message):
+    chat_id = message.chat.id
+    if chat_id in list(users.keys()) and users[chat_id]["azkar"]:
+        users[str(chat_id)]["azkar"] = False
+        write(db_path, users)
+        app.reply_to(message, "تم تعطيل الأذكار و الأدعيه 🥲!\n\nترفض الحسنات؟ 🥲!️")
+        return
+    app.reply_to(message, "الأذكار والأدعيه غير مفعله 🥲")
+    def main():
+    azkar_thread = threading.Thread(target=azkar)
+    prophet_thread = threading.Thread(target=prophet)
+    azkar_thread.start()
+    prophet_thread.start()
+    
+    
+def azkar():
+    while True:
+        if len(list(users.keys())) == 0:
+            continue
+        response = requests.get(url).text
+        for user in users.keys():
+            if users[user].get("azkar"):
+                try:
+                    app.send_message(
+                        user,
+                        response
+                    )
+                except:
+                    continue
+            continue
+        time.sleep(60)
+        
 print("@Almortagel_12")
 print("\033[1;33m• Running..... /start ")
 bot.polling(none_stop=True)
