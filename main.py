@@ -27,8 +27,39 @@ def start(message):
 ✓ 👋 مرحبا بك عزيزي في انا بوت  اسلامي اقدم تلاوات باصوات وابدعات شيوخ متعددين 
 ✓ 🔍 انقر على الزر ادناة لارسال ماتريد
 """, reply_markup=private)
-
-   azkarl = [
+        
+@bot.callback_query_handler(func=lambda call: True)
+def tylaoa(call):
+    if call.data == "quran":
+        voices = "https://t.me/ALMORTAGELRSK/" + str(random.randint(7, 276))
+        bot.send_voice(call.message.chat.id, voices, caption="""
+✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
+""")
+    elif call.data == "religious":
+        voicees = "https://t.me/livequrann/" + str(random.randint(22, 221))
+        bot.send_photo(call.message.chat.id, voicees, caption="""
+✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
+""")
+    elif call.data == "quraan":
+        voicess = "https://t.me/fresdewi/" + str(random.randint(2, 201))
+        bot.send_voice(call.message.chat.id, voicess, caption="""
+✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
+""")
+    elif call.data == "religiou":
+        voice = "https://t.me/dmatrix12/" + str(random.randint(799, 1341))
+        bot.send_photo(call.message.chat.id, voice, caption="""
+✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
+""")
+    elif call.data == "kotob":
+        voic = "https://t.me/kotobeslameah/" + str(random.randint(2, 1950))
+        bot.send_document(call.message.chat.id, voic, caption="""
+ تم اختيار هذا الكتاب لك
+""")
+    elif call.data == "qurn":
+        voics = ["اللهم صلي علي سيدنا ونبينا محمد",]
+        bot.send_message(call.message.chat.id, voics)
+    elif call.data == "azkar":
+    azkarl = [
    "لا إِلَهَ إِلا أَنتَ سُبْحَانَكَ إِنِّي كُنتُ مِنَ الظَّالِمِينَ🌸",
    "اللَّهُمَّ أَعِنِّي عَلَى ذِكْرِكَ , وَشُكْرِكَ , وَحُسْنِ عِبَادَتِكَ🎈💞",
    "استغفر الله العظيم وأتوبُ إليه 🌹",
@@ -149,38 +180,6 @@ def start(message):
 "يَابًنِيَ إنِ صّلَاح الَحًيَاةّ فُ أتٌجّاهّ الَقُبًلَهّ 🥀🌿",
 "الَلَهّمً ردٍنِا إلَيَکْ ردٍا جّمًيَلَا💔🥺"
    ]
-        
-@bot.callback_query_handler(func=lambda call: True)
-def tylaoa(call):
-    if call.data == "quran":
-        voices = "https://t.me/ALMORTAGELRSK/" + str(random.randint(7, 276))
-        bot.send_voice(call.message.chat.id, voices, caption="""
-✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
-""")
-    elif call.data == "religious":
-        voicees = "https://t.me/livequrann/" + str(random.randint(22, 221))
-        bot.send_photo(call.message.chat.id, voicees, caption="""
-✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
-""")
-    elif call.data == "quraan":
-        voicess = "https://t.me/fresdewi/" + str(random.randint(2, 201))
-        bot.send_voice(call.message.chat.id, voicess, caption="""
-✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
-""")
-    elif call.data == "religiou":
-        voice = "https://t.me/dmatrix12/" + str(random.randint(799, 1341))
-        bot.send_photo(call.message.chat.id, voice, caption="""
-✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
-""")
-    elif call.data == "kotob":
-        voic = "https://t.me/kotobeslameah/" + str(random.randint(2, 1950))
-        bot.send_document(call.message.chat.id, voic, caption="""
- تم اختيار هذا الكتاب لك
-""")
-    elif call.data == "qurn":
-        voics = ["اللهم صلي علي سيدنا ونبينا محمد",]
-        bot.send_message(call.message.chat.id, voics)
-    elif call.data == "azkar":
         bot.send_message(call.message.chat.id, azkarl)
     elif call.data == "starttt":
         voic = ["مرحبا بك في قسم المصحف الرجاء ارسال رقم الصفحة لتصفح صفحات القرآن الكريم للرجوع ارسل /start",]
