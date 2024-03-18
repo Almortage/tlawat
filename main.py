@@ -58,7 +58,7 @@ def tylaoa(call):
 """)
     elif call.data == "kotoob":
         voicn = "https://t.me/Source_Turbo/" + str(random.randint(220, 319))
-        bot.send_message(call.message.chat.id, text=voicn)
+        bot.send_video(call.message.chat.id, text=voicn)
     elif call.data == "qurn":
         voics = ["اللهم صلي علي سيدنا ونبينا محمد",]
         bot.send_message(call.message.chat.id, voics)
