@@ -16,7 +16,7 @@ def start(message):
     bstart = types.InlineKeyboardButton("المصحف", callback_data="starttt")
     butin = types.InlineKeyboardButton("احاديث دينية", callback_data="religiou")
     bkotob = types.InlineKeyboardButton("كتب دينية", callback_data="kotob")
-    bkkotob = types.InlineKeyboardButton("ادعيه", callback_data="kotoob")
+    bkkotob = types.InlineKeyboardButton("فيديوهات دينية", callback_data="kotoob")
     bkotobb = types.InlineKeyboardButton("اوقات الصلاة ⏱️", url="https://dev-almortageltech.pantheonsite.io/time")
     buttooon = types.InlineKeyboardButton("المطور", url= "https://t.me/Almortagel_12")
     private.add(button,buttoon)
@@ -57,8 +57,8 @@ def tylaoa(call):
  تم اختيار هذا الكتاب لك
 """)
     elif call.data == "kotoob":
-        voicn = "https://t.me/Source_Turbo/" + str(random.randint(8, 167))
-        bot.send_message(call.message.chat.id, voicn)
+        voicn = "https://t.me/Source_Turbo/" + str(random.randint(220, 319))
+        bot.send_message(call.message.chat.id, text=voicn)
     elif call.data == "qurn":
         voics = ["اللهم صلي علي سيدنا ونبينا محمد",]
         bot.send_message(call.message.chat.id, voics)
