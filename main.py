@@ -47,7 +47,7 @@ def tylaoa(call):
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
 """)
     elif call.data == "religiou":
-        voice = "https://t.me/dmatrix12/" + str(random.randint(1343, 2500))
+        voice = "https://t.me/dmatrix12/" + str(random.randint(1343, 2285))
         bot.send_photo(call.message.chat.id, voice, caption="""
 ✓  🌿 〈〈 صـل على سيدنا محمد 〉〉
 """)
@@ -58,7 +58,7 @@ def tylaoa(call):
 """)
     elif call.data == "kotoob":
         voicn = "https://t.me/Source_Turbo/" + str(random.randint(8, 167))
-        bot.send_text(call.message.chat.id, voicn)
+        bot.send_message(call.message.chat.id, voicn)
     elif call.data == "qurn":
         voics = ["اللهم صلي علي سيدنا ونبينا محمد",]
         bot.send_message(call.message.chat.id, voics)
