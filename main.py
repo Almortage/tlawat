@@ -133,8 +133,8 @@ def disable_azkar(message: Message):
         return
     app.reply_to(message, "الأذكار والأدعيه غير مفعله 🥲")
     def main():
-    azkar_thread = threading.Thread(target=azkar)
-    prophet_thread = threading.Thread(target=prophet)
+    azkar_thread = threading.thread(target=azkar)
+    prophet_thread = threading.thread(target=prophet)
     azkar_thread.start()
     prophet_thread.start()
     
