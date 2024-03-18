@@ -50,7 +50,7 @@ def tylaoa(call):
 """)
     elif call.data == "ruraan":
         voicu = "https://t.me/Source_Turbo/" + str(random.randint(8, 167))
-        bot.send_messages(call.message.chat.id, voicu)
+        bot.send_message(call.message.chat.id, text=voicu)
     elif call.data == "religiou":
         voice = "https://t.me/dmatrix12/" + str(random.randint(1343, 2285))
         bot.send_photo(call.message.chat.id, voice, caption="""
