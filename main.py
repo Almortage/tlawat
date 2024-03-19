@@ -110,7 +110,7 @@ def alll(call):
     keyboard.row(previous,next)
 
     bot.edit_message_media(types.InputMediaPhoto(url), call.message.chat.id, call.message.message_id,reply_markup=keyboard)
- @bot.message_handler(func=lambda message: True)
+@bot.message_handler(func=lambda message: True)
 def msgs(message):
     text = message.text
     if text == "تلاو" or text == "تلاوات" or text == "تلاوة":
