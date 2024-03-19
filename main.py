@@ -110,7 +110,19 @@ def alll(call):
     keyboard.row(previous,next)
 
     bot.edit_message_media(types.InputMediaPhoto(url), call.message.chat.id, call.message.message_id,reply_markup=keyboard)
-        
+ @bot.message_handler(func=lambda message: True)
+def msgs(message):
+    text = message.text
+    if text == "تلاو" or text == "تلاوات" or text == "تلاوة":
+        voice_url = "https://t.me/ALMORTAGELRSK/" + str(random.randint(7, 276))
+        bot.send_voice(message.chat.id, voice_url, caption="« صلي على سيدنا محمد ﷺ »", reply_to_message_id=message.message_id, reply_markup=telebot.types.InlineKeyboardMarkup().row(
+            telebot.types.InlineKeyboardButton(text='✧ - المطور 🌐', url='https://t.me/Almortagel_12'),
+            telebot.types.InlineKeyboardButton(text='✧ - قناة مطور البوت', url='https://t.me/AlmortagelTech'))
+    elif text == "ادعيه" or text == "دعاء" or text == "تلاوة":
+        voic_url = "https://t.me/Source_Turbo/" + str(random.randint(320, 389))
+        bot.send_voice(message.chat.id, voic_url, caption="« صلي على سيدنا محمد ﷺ »", reply_to_message_id=message.message_id, reply_markup=telebot.types.InlineKeyboardMarkup().row(
+            telebot.types.InlineKeyboardButton(text='✧ - المطور 🌐', url='https://t.me/Almortagel_12'),
+            telebot.types.InlineKeyboardButton(text='✧ - قناة مطور البوت', url='https://t.me/AlmortagelTech'))           
 print("@Almortagel_12")
 print("\033[1;33m• Running..... /start ")
 bot.polling(none_stop=True)
